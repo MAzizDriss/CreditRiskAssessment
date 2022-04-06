@@ -1,0 +1,12 @@
+Basic git commands:
+	to initiate the repo :
+		git init
+		git add remote origin https://github.com/MAzizDriss/CreditRiskAssessment
+		git branch -M main
+	to work in this repo
+		ALWAYSSSSS !!!!: git pull origin main
+	To add your work :
+		git add .
+		git commit -m "comment"
+		git push -u origin main
+	
