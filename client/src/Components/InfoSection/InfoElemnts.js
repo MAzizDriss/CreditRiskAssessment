@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-
+import '../../Assets/css/root.css'
 export const InfoContainer = styled.div`
     color:#fff;
-    background: ${({lightBg}) => (lightBg? '#f9f9f9':'#29597d')};
+    background: ${({lightBg}) => (lightBg? '#f9f9f9':'var(--light-blue)')};
 
     @media screen and (max-width: 768px){
         padding-top: 50px ;
@@ -50,7 +50,7 @@ export const TextWrapper = styled.div`
     
 `
 export const TopLine = styled.p`
-    color : #8bc53f ;
+    color : var(--green) ;
     font-size: 16px;
     line-height: 16px;
     font-weight: 700;

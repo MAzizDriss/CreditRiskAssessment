@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import '../../Assets/css/root.css'
 
 export const ServicesContainer = styled.div`
     height: 700px;
@@ -6,7 +7,7 @@ export const ServicesContainer = styled.div`
     flex-direction: column;
     padding-top:50px;
     align-items: center;
-    background: #29597d ;
+    background: var(--light-blue) ;
 
     @media screen and (max-width: 768px){
         height:1500px;
@@ -42,7 +43,7 @@ export const ServicesCard = styled.div`
     align-items: center;
     padding: 40px 10px;
     border-radius: 10px;
-    max-height: 340px;
+    max-height: 350px;
     maw-width:300px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     transition : all 0.2 ease-in-out;

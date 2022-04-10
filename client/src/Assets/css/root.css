@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'poppins';
+    src: url('../fonts/Poppins-Regular.ttf');
+}
+@font-face {
+    font-family: 'IBMP';
+    src: url('../fonts/IBMPlexSansKR-Regular.ttf');
+}
+
+:root{
+    --primary:'poppins';
+    --secondary:'IBMP';
+    --dark-blue:#0e4064;
+    --light-blue:#29597d;
+    --green:#8bc53f;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: var(--primary);
+}
+p{
+    font-family: var(--secondary);
+}
