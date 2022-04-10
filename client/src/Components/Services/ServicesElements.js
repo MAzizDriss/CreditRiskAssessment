@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import '../../Assets/css/root.css'
-
 export const ServicesContainer = styled.div`
     height: 700px;
     display: flex;

@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import '../../Assets/css/root.css'
 export const InfoContainer = styled.div`
     color:#fff;
     background: ${({lightBg}) => (lightBg? '#f9f9f9':'var(--light-blue)')};
