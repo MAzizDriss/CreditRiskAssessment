@@ -4,9 +4,9 @@ import "../../Assets/css/Navbar.css";
 function Navbar () {
   return (
     <div className='header'>
-      <h1 >Online Banking</h1>
+      <h1 >Online Tunisian Banking</h1>
      
-      <div >
+      <div>
         <ul className='nav_link'>
           
           <li><a className='a' href ="#">About Us</a></li>

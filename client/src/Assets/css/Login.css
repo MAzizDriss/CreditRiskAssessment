@@ -6,8 +6,8 @@ vert  #8bc53f
     text-align: center;
     justify-content: right;
     display: flex; 
-    padding-top: 90px;
-    padding-bottom:90px;
+    padding-top: 110px;
+    padding-bottom:40px;
     padding-right: 90px;
     background-image:url("../images/BG.png") ;
     background-repeat: no-repeat;
@@ -16,13 +16,15 @@ vert  #8bc53f
     background-size: 1900px 1000px;
     
     
+    
   }
+
   .sub-main {
     display: flex;
     justify-content: center;
   
     height: 550px;
-    width: 25%;
+    width: 30%;
     /*box-shadow: 9px 9px 9px 9px rgb(207, 207, 207);*/
     padding-top: 25px;
     border-radius: 30px; 

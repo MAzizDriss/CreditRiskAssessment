@@ -2,6 +2,7 @@ import  "../../Assets/css/Login.css";
 import profile from "../../Assets/images/user1.png";
 import email from "../../Assets/images/mail.png";
 import pass from "../../Assets/images/mdp.png";
+import {Link } from 'react-router-dom'
 
 
 function Login() {
@@ -28,9 +29,13 @@ function Login() {
                   <img src={pass} alt="pass" className="email"/>
                   <input type="password" placeholder="Pass" className="name"/>
               </div>
+              
               <div className="login-button">
+              <Link to='/a/dash'>
                 <button>Login</button>
+                </Link>
               </div>
+              
             
               <p className="link">
                 <a href="#" >Forgot password ?</a> 
@@ -42,6 +47,7 @@ function Login() {
         
 
       </div>
+      
     </div>
    
   );
