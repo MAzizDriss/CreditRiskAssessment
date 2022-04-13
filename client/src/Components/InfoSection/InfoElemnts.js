@@ -10,12 +10,12 @@ export const InfoContainer = styled.div`
     `
 export const InfoWrapper = styled.div`
     display: grid;
-    z_index: 1;
+    z-index: 1;
     height: 700px;
     width: 100%;
-    max_wdith: 1100px;
-    margin_right: auto;
-    margin_left: auto;
+    max-width: 1100px;
+    margin-right: auto;
+    margin-left: auto;
     justify-content: center;
 `
 export const InfoRow=styled.div`
@@ -92,5 +92,6 @@ export const Img = styled.img`
     width:100%;
     margin: 0 0 10px 0px;
     padding: 0;
+
 
 `
