@@ -8,8 +8,8 @@ import Navbar from '../../Components/Navbar/Navbar'
 const WelcomePage = () => {
   return (
     <>
-    {/* <Navbar/> */}
-    {/* <Login/> */}
+    <Navbar/>
+    <Login/>
     <InfoSection {...homeObjOne}/>
     <InfoSection {...homeObjtwo}/>
     <Services/>

@@ -50,7 +50,7 @@ vert  #8bc53f
     border-radius: 130px;
   } 
 
-  input{
+  .name{
       width: 300px;
       height: 50px;
       border-radius: 60px;

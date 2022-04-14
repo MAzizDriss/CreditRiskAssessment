@@ -5,8 +5,9 @@ import DemandsList from './Pages/Admin/DemandsList';
 import Dashboard from './Pages/Admin/Dashboard';
 import Inbox from './Pages/Admin/Inbox';
 import MyAccount from './Pages/Admin/MyAccount';
+import BankerUserForm from './Components/BankerFrom/BankerUserForm';
 
-function App() {
+const App =() => {
   return (
     <Router>
       <Routes>
@@ -21,3 +22,4 @@ function App() {
   );
 }
 
+export default App
