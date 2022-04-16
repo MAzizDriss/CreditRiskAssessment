@@ -17,22 +17,22 @@ function Login() {
           </div>
 
           <div className="text">
-            <h2>Login Page</h2>
+            <h2 className="h2">Login Page</h2>
 
-              <h4>USER ID</h4>
+              <h4 className="h4">USER ID</h4>
               <div>
                 <img src={email} alt="email" className="email"/>
-                <input type="text" placeholder="User ID" className="name"/>
+                <input type="text"  className="name"/>
               </div>
-              <h4>PASSWORD</h4>
+              <h4 className="h4">PASSWORD</h4>
               <div className="second-input">
                   <img src={pass} alt="pass" className="email"/>
-                  <input type="password" placeholder="Pass" className="name"/>
+                  <input type="password"  className="name"/>
               </div>
               
               <div className="login-button">
               <Link to='/a/dash'>
-                <button>Login</button>
+                <button className="button">Login</button>
                 </Link>
               </div>
               

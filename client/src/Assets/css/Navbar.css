@@ -1,54 +1,117 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-   
-   
-}
-li {
-    font-family: "Montserrat" ,sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    text-decoration-color : white;
-    text-decoration: none;
-}
-.header{
-    z-index: 50;
-    width:100%;
-    height: 80px;
-    position:fixed;
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 20%;
+.Navbar {
     background-color: #0e4064;
-    color:white;
-    
-   
-}
-.logo {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  
+  .Nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    max-width: 1500px;
+  }
+  
+  .Nav-logo {
+    color: white;
+    align-items: center;
+    margin-left: 20px;
     cursor: pointer;
-
-}
-.nav_link{
-    list-style: none;
-
-}
-.nav_link li {
-    display: inline-block;
-    padding: 0px 20px;
-}
-
-.nav_link li  {
-    transition: all 0.3s ease 0s;
-}
-
-.nav_link li,a:hover {
-    color:#8bc53f;
-}
-.a{
     text-decoration: none;
-    color:white;
-}
-
+    font-size: 2rem;
+    flex-grow: 1;
+  }
+  
+  .Nav-menu {
+    display: flex;
+    list-style: none;
+    text-align: center;
+    margin-right: 2rem;
+  }
+  
+  .Nav-links {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    height: 100%;
+    border-bottom: 3px solid transparent;
+  }
  
+  .Nav-item {
+    line-height: 40px;
+    margin-right: 1rem;
+  }
+  
+  .Nav-item:after {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 0;
+    background: transparent;
+    transition: width 0.7s ease, 
+    background-color 0.5s ease;
+  }
+  
+  .Nav-item:hover:after {
+    width: 100%;
+    background: #29597d;
+  }
+  
+  .Nav-item .active {
+    color: #29597d;
+    border: 1px solid #8bc53f;
+  }
+  
+  .Nav-icon {
+    display: none;
+  }
+ 
+  @media screen and (max-width: 960px) {
+    .Nav-menu {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      border-top: 1pxsolid #fff;
+      position: absolute;
+      top: 80px;
+      left: -110%;
+      opacity: 1;
+      transition: all 0.5s ease;
+    }
+  
+    .Nav-menu.active {
+      background: #0e4064;
+      left: 0px;
+      opacity: 1;
+      transition: all 0.5s ease;
+      z-index: 1;
+      margin-top: 0;
+    }
+    .Nav-item .active {
+      color: #8bc53f;
+      border: #29597d;
+    }
+    .Nav-links {
+      padding: 1.5rem;
+      width: 100%;
+      display: table;
+    }
+  
+    .Nav-icon {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(-100%, 60%);
+      font-size: 1.8rem;
+      cursor: pointer;
+      color:white;
+    }
+  }

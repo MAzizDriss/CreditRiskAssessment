@@ -5,18 +5,22 @@ import { homeObjOne,homeObjtwo } from '../../Components/InfoSection/Data'
 import Footer from '../../Components/Footer/Footer'
 import Login from '../../Components/Login/Login'
 import Navbar from '../../Components/Navbar/Navbar'
-const WelcomePage = () => {
+
+
+function WelcomePage() {
+
   return (
     <>
-    <Navbar/>
-    <Login/>
-    <InfoSection {...homeObjOne}/>
-    <InfoSection {...homeObjtwo}/>
-    <Services/>
-    <Footer/>
-    
-    
-  </>
+      
+      <Navbar /> 
+      <Login />
+      <InfoSection {...homeObjOne} />
+      <InfoSection {...homeObjtwo} />
+      <Services />
+      <Footer />
+
+
+    </>
   )
 }
 

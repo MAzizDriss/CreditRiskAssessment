@@ -59,41 +59,41 @@ function Sidebar() {
           </Link>
           <h2 className='logo' >Online Tunisian Banking</h2>
           <div className='navbar avatar' >
-      <div className='avatar'><IconContext.Provider value={{size:'25px',color:'#fff'}}><IoIcons.IoIosArrowDown  onClick={handleClick}/></IconContext.Provider>
+            <div className='avatar'><IconContext.Provider value={{size:'25px',color:'#fff'}}><IoIcons.IoIosArrowDown  onClick={handleClick}/></IconContext.Provider>
        
       
-      <Popover
-        className={classes.pop}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        
-      >
-        <div >
-        <List component="nav" aria-label="secondary mailbox folder">
-        <Link to='/a' className='lnk'>
-        <ListItem button>
-          <ListItemText primary="My Account" />
-        </ListItem>
-        </Link>
-        <Link to='/' className='lnk'>
-        <ListItem button >
-          <ListItemText primary="Log out"  />
-        </ListItem>
-        </Link>
-      </List>
-        </div>
-      </Popover>
-      </div>
-    </div>
+              <Popover
+                className={classes.pop}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+                
+              >
+                <div >
+                  <List component="nav" aria-label="secondary mailbox folder">
+                    <Link to='/a' className='lnk'>
+                      <ListItem button>
+                      <ListItemText primary="My Account" />
+                      </ListItem>
+                    </Link>
+                    <Link to='/' className='lnk'>
+                      <ListItem button >
+                        <ListItemText primary="Log out"  />
+                      </ListItem>
+                    </Link>
+                  </List>
+                </div>
+              </Popover>
+            </div>
+          </div>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items' >
