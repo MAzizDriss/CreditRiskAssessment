@@ -1,16 +1,20 @@
 import React from 'react'
 import {Formik, Form} from 'formik'
 import * as Yup from 'yup'
-import { FormContainer, FormWrapper,Space, FormLabel} from './BFormElements'
-import {Container,Typography,
-        Grid,
-        TextField} from '@material-ui/core'
+import Sidebar from '../Sidebar/Sidebar'
+import SelectWrapper from './SelectWrapper'
+import { Space, FormLabel} from './BFormElements'
+import {Container,Grid,TextField} from '@material-ui/core'
 import TextFieldWrapper from './TextFieldWrapper'
+import DatePicker from './DatePicker'
+import { loan_intent,home_ownership, ages } from './Data'
+import '../../Assets/css/form.css'
+import ButtonWrapper from './Button'
 const INITIAL_FORM_STATE={
-    firstName:'',
-    lastName:'',
-    email:'',
-    phone:'',
+    firstName:'John',
+    lastName:'Doe',
+    email:'John@Doe.mail',
+    phone:"56160606",
     loan_amnt:'',
     loan_term:'',
     loan_interest_rate:'',
@@ -19,6 +23,9 @@ const INITIAL_FORM_STATE={
     person_emp_length:'',
     dof:'',
     home_ownership:'',
+    age:30,
+    message:'',
+    files_verified:''
 
 }
 
@@ -31,12 +38,14 @@ const FORM_VALIDATION = Yup.object().shape({
     loan_amnt:Yup.number().min(500).typeError('Please enter a valid number').required('Required!'),
     loan_term:Yup.number().min(6,"The loan term should be greater or equals 6 months").required('Required!'),
     loan_interest_rate:Yup.number(),
-    loan_intent:Yup.string().matches(/(personal|education|medical|venture|homeimprovement|debtconsilidation)/),
+    loan_intent:Yup.string().required('Required'),
     annual_income:Yup.number(),
     person_emp_length:Yup.number().integer().max(45),
     dof:Yup.boolean().typeError('it is a boolean'),
-    home_ownership:Yup.string().matches(/(rent|own|mortgage|other)/),
-
+    home_ownership:Yup.string().min(2),
+    age:Yup.number().integer().required('Required'),
+    message:Yup.string(),
+    files_verified:Yup.boolean().required('Required !')
 
 
 })
@@ -44,9 +53,8 @@ const FORM_VALIDATION = Yup.object().shape({
 const BankerUserForm = () => {
   return (
       <>
-      <Space/>
-        <Container maxWidth="sm">
-        <h2>Banker User Form</h2>
+      <Sidebar/>
+        <Container  className="Form-container">
         <Formik initialValues={{
             ...INITIAL_FORM_STATE}
         }
@@ -71,7 +79,7 @@ const BankerUserForm = () => {
                     <Grid item xs={6}>
                     <TextFieldWrapper
                             name="lastName"
-                            label="Last Name" 
+                            label="Last Name"
                             />
                     </Grid>
                     <Grid item xs={12}>
@@ -80,13 +88,19 @@ const BankerUserForm = () => {
                             label="E-mail" 
                             />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={10}>
                     <TextFieldWrapper
                             name="phone"
                             label="Phone Number" 
                             />
                     </Grid>
-
+                    <Grid item xs={2}>
+                    <SelectWrapper
+                            name="age"
+                            label="Age" 
+                            options={ages}
+                            />
+                    </Grid>
                     <Grid item xs={12}>
                         <FormLabel>
                             Client loan details
@@ -111,16 +125,17 @@ const BankerUserForm = () => {
                             label="Loan interest rate" 
                             />
                     </Grid>
-                    <Grid item xs={12}>
-                    <TextFieldWrapper
-                            name="loan_intent"
-                            label="Intent of the loan" 
-                            />
-                    </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={7}>
                     <TextFieldWrapper
                             name="annual_income"
                             label="Annual Income declared" 
+                            />
+                    </Grid>
+                    <Grid item xs={5}>
+                    <SelectWrapper
+                            name="loan_intent"
+                            label="Loan Intent " 
+                            options={loan_intent}
                             />
                     </Grid>
                     <Grid item xs={7}>
@@ -130,18 +145,45 @@ const BankerUserForm = () => {
                             />
                     </Grid>
                     <Grid item xs={5}>
-                    <TextFieldWrapper
+                    <SelectWrapper
                             name="dof"
                             label="Defaulted before? " 
+                            options={{true:'Yes',false:'No'}}
                             />
                     </Grid>
-                    <Grid item xs={12}>
-                    <TextFieldWrapper
+                    <Grid item xs={7}>
+                    <SelectWrapper
                             name="home_ownership"
-                            label="Ownership of home " 
+                            label="Ownership of home" 
+                            options={home_ownership}
                             />
                     </Grid>
-                    
+                    <Grid item xs={5}>
+                        <SelectWrapper
+                                name="files_verified"
+                                label="Files verified ?"
+                                options={{true:'yes',false:'no'}}
+                        />
+                    </Grid>
+                    <FormLabel>
+                        Statement of purpose
+                   </FormLabel>
+                   <Grid item xs={12}>
+                        <TextFieldWrapper
+                        name="message"
+                        label="Statement Of Purpose"
+                        multiline={true}
+                        rows={4}
+                        />
+                   </Grid>
+                   <Grid item xs={9}>
+                        <></>
+                   </Grid>
+                    <Grid item xs={2}>
+                            <ButtonWrapper>
+                                    Submit
+                            </ButtonWrapper>
+                    </Grid>
                 </Grid>
             </Form>
         </Formik>

@@ -18,5 +18,6 @@ export const FormLabel = styled.h3`
     color:var(--light-blue);
     font-size:18px;
     line-height:1.1;
+    margin: 2% 1%;
 
 `
