@@ -6,6 +6,8 @@ import Dashboard from './Pages/Admin/Dashboard';
 import Inbox from './Pages/Admin/Inbox';
 import MyAccount from './Pages/Admin/MyAccount';
 import BankerUserForm from './Components/BankerFrom/BankerUserForm';
+import RTable from './Components/RequestTable/Table';
+
 
 const App =() => {
   return (
@@ -17,6 +19,7 @@ const App =() => {
          <Route exact path='/a/inbox' element={<Inbox/>}></Route>
          <Route exact path='/a/account' element={<MyAccount/>}></Route>
          <Route exact path="/a/form" element= {<BankerUserForm/>}> </Route>
+         <Route exact path="/a/table" element= {<RTable/>}> </Route>
       </Routes>
     </Router>
   );
