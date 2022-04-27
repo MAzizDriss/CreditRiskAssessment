@@ -22,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   pop:{
-    marginTop:'15px',
-   Color:'#8bc53f',
-    width:'150%'
+    marginTop:'20px',
+    color:'#8bc53f',
+    width:'100%'
   }
   ,
   txt:{
@@ -53,12 +53,12 @@ function Sidebar() {
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
-        <div className='navbar'>
+        <div className='upbar'>
           <Link to='#' className='menu-bars'>
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
           <h2 className='logo' >Online Tunisian Banking</h2>
-          <div className='navbar avatar' >
+          <div className='upbar avatar' >
             <div className='avatar'><IconContext.Provider value={{size:'25px',color:'#fff'}}><IoIcons.IoIosArrowDown  onClick={handleClick}/></IconContext.Provider>
        
       
@@ -79,7 +79,7 @@ function Sidebar() {
               >
                 <div >
                   <List component="nav" aria-label="secondary mailbox folder">
-                    <Link to='/a' className='lnk'>
+                    <Link to='/a/account' className='lnk'>
                       <ListItem button>
                       <ListItemText primary="My Account" />
                       </ListItem>

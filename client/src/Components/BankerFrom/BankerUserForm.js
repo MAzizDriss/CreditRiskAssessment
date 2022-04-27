@@ -10,7 +10,6 @@ import DatePicker from './DatePicker'
 import { loan_intent,home_ownership, ages } from './Data'
 import '../../Assets/css/form.css'
 import ButtonWrapper from './Button'
-
 const INITIAL_FORM_STATE={
     firstName:'John',
     lastName:'Doe',
@@ -51,24 +50,20 @@ const FORM_VALIDATION = Yup.object().shape({
 
 })
 
-
-function BankerUserForm  (props)  {
-      
+const BankerUserForm = () => {
   return (
       <>
-      {/* <Sidebar/> */}
+      <Sidebar/>
         <Container  className="Form-container">
         <Formik initialValues={{
             ...INITIAL_FORM_STATE}
         }
         validationSchema={FORM_VALIDATION}
         onSubmit={values => {
-               
-            console.log(values)
-        }
+            console.log(values)}
         }
         >
-             <Form >
+             <Form>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <FormLabel>
@@ -76,7 +71,8 @@ function BankerUserForm  (props)  {
                         </FormLabel>
                     </Grid>
                     <Grid item xs={6}>
-                            <TextFieldWrapper
+                            <TextFieldWrapper 
+                            
                             name="firstName"
                             label="First Name" 
                             />
@@ -99,13 +95,13 @@ function BankerUserForm  (props)  {
                             label="Phone Number" 
                             />
                     </Grid>
-                        <Grid item xs={2}>
-                                <SelectWrapper
-                                        name="age"
-                                        label="Age" 
-                                        options={ages}
-                                        />
-                        </Grid>
+                    <Grid item xs={2}>
+                    <SelectWrapper
+                            name="age"
+                            label="Age" 
+                            options={ages}
+                            />
+                    </Grid>
                     <Grid item xs={12}>
                         <FormLabel>
                             Client loan details
@@ -185,7 +181,7 @@ function BankerUserForm  (props)  {
                         <></>
                    </Grid>
                     <Grid item xs={2}>
-                            <ButtonWrapper   >
+                            <ButtonWrapper>
                                     Submit
                             </ButtonWrapper>
                     </Grid>

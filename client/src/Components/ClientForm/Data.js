@@ -1,0 +1,20 @@
+export const countries= {
+    'PERSONAL': 'Personal',
+    'EDUCATION': 'Education',
+    'MEDICAL': 'Medical',
+    'VENTURE':'Venture',
+    'HOMEIMPROVEMENT':'Home improvement',
+    'DEBTCONSILIDATION':'Debt Consilidation',
+    'PERSzL': 'Personal',
+    'EDUzION': 'Education',
+    'MEzAL': 'Medical',
+    'VENzRE':'Venture',
+    'HOMEzOVEMENT':'Home improvement',
+    'DEBTCOzLIDATION':'Debt Consilidation',
+    'PERSzNAL': 'Personal',
+    'zTION': 'Education',
+    'zCAL': 'Medical',
+    'VzRE':'Venture',
+    'HOMzOVEMENT':'Home improvement',
+    'DzLIDATION':'Debt Consilidation'
+}
