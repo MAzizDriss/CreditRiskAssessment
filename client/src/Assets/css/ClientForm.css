@@ -1,0 +1,21 @@
+.cont{margin-top: 50px;
+    align-items: center;
+    
+}
+.hd{
+    background-color: var(--light-blue);
+    width: 70%;
+    height:50px;
+    margin-left: 14%;
+    margin-bottom: 50px;
+    align-items: center;
+    padding: 20px;
+    display: flex;
+    
+   
+    border-radius: 10px;
+}
+.txss{
+    color: white;
+    font-size: 25px;
+}

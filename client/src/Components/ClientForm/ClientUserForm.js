@@ -41,7 +41,7 @@ const FORM_VALIDATION = Yup.object().shape({
 function ClientUserForm(handleClick) {
     const [selectedDate, handleDateChange] = useState();
     return <>
-        <Container className='Form-container'>
+        <Container >
             <Formik
                 initialValues={{
                     ...INITIAL_FORM_STATE
@@ -115,7 +115,7 @@ function ClientUserForm(handleClick) {
                                 label="Birth Location"
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                    { /* <Grid item xs={6}>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <KeyboardDatePicker
                                     autoOk
@@ -129,7 +129,7 @@ function ClientUserForm(handleClick) {
                                     onChange={date => handleDateChange(date)}
                                 />
                             </MuiPickersUtilsProvider>
-                        </Grid>
+            </Grid>*/}
                         
                         <Grid item xs={6}>
                             <TextFieldWrapper

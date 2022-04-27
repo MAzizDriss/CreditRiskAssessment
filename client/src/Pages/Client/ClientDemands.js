@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ClientFooter from '../../Components/Footer/ClientFooter';
 import ClientNav from '../../Components/Navbar/ClientNav';
 
@@ -8,7 +9,7 @@ function ClientDemands() {
   return <div>
     <ClientNav/>
     <div>
-    demands list
+     ClientDemands
     </div>
       <ClientFooter/>
   </div>;

@@ -13,7 +13,7 @@ import ClientFooter from '../../Components/Footer/ClientFooter';
 function HomeClient() {
   return <div>
     <ClientNav />
-    <div className='bluecont'><h3 className='welcome'>Welcome !!!</h3></div>
+    <div className='bluecont'></div>
     
 
     <div className='bord'>
