@@ -1,6 +1,6 @@
-import React , { useState } from 'react';
+import React, { useState } from 'react';
 import "../../Assets/css/clientnav.css";
-import { NavLink ,Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Popover from '@material-ui/core/Popover';
 import ListItemText from '@material-ui/core/ListItemText';
 import List from '@material-ui/core/List';
@@ -12,21 +12,21 @@ import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
 
-  
-  pop:{
-    marginRight:'40px', 
-    marginTop:'20px',
-    color:'#8bc53f',
-   width:'100%'
+
+  pop: {
+    marginRight: '40px',
+    marginTop: '20px',
+    color: '#8bc53f',
+    width: '100%'
   }
   ,
-  dv:{
-    color:'black'
+  dv: {
+    color: 'black'
   }
- 
+
 }));
-function ClientNav () {
-  const classes=useStyles()
+function ClientNav() {
+  const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -38,53 +38,58 @@ function ClientNav () {
   };
 
   const open = Boolean(anchorEl);
- 
-      return  (
-        <nav className="head">
-        <div className="head-container">
-          <Link  to="/c/home" className="head-logo">
-            Online Tunisian Banking
-          </Link>
-          <div>
-           <Fab size="medium" color="default" aria-label="add" onClick={handleClick}>
-             <PersonRoundedIcon/></Fab>
-           <Popover
-                className={classes.pop}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'center',
-                }}
-                
-              >
-                 <List component="nav" aria-label="secondary mailbox folder">
-                   
-                  
-                    <Link to='/c/account' className='lnk'>
-                      <ListItem button>
-                      <ListItemText primary="My Account" />
-                      </ListItem>
-                      <Divider className={classes.dv}/>
-                    </Link>
-                    <Link to='/' className='lnk'>
-                      <ListItem button >
-                        <ListItemText primary="Log out"  />
-                      </ListItem>
-                    </Link>
-                  </List>
-              </Popover>
 
-          </div>
+  return (
+    <nav className="head">
+      <div className="head-container">
+        <Link to="/c/home" className="head-logo">
+          Online Tunisian Banking
+        </Link>
+        <div>
+          <Fab size="medium" color="default" aria-label="add" onClick={handleClick}>
+            <PersonRoundedIcon /></Fab>
+          <Popover
+            className={classes.pop}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+
+          >
+            <List component="nav" aria-label="secondary mailbox folder">
+
+
+              <Link to='/c/account' className='lnk'>
+                <ListItem button>
+                  <ListItemText primary="My Account" />
+                </ListItem>
+                <Divider className={classes.dv} />
+              </Link>
+              <Link to='/' className='lnk'>
+                <ListItem button onClick={(evt) => {
+                  console.log('logout')
+                  localStorage.setItem('token', "");
+                  localStorage.setItem('connected', false);
+                  window.location.replace("http://localhost:3000/")
+                }} >
+                  <ListItemText primary="Log out" />
+                </ListItem>
+              </Link>
+            </List>
+          </Popover>
+
         </div>
+      </div>
     </nav>
-  
-);
+
+  );
 }
 
 export default ClientNav;

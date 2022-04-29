@@ -12,7 +12,7 @@ import jwt
 def token_required(f):
     @wraps(f)
     def decorated(*args,**kwargs):
-        token = request.args.get('token')
+        token = request.headers.get('token')
         if not token:
             return jsonify({'message':'Token is missing!'}),403
         try:
@@ -25,7 +25,7 @@ def token_required(f):
 def admin_required(f):
     @wraps(f)
     def decorated(*args,**kwargs):
-        token = request.args.get('token')
+        token = request.headers.get('token')
         if not token:
             return jsonify({'message':'Token is missing!'}),403
         try:
@@ -47,29 +47,37 @@ def admin_required(f):
 def home():
     return "Hello world !"
 
+@app.route('/api/auth')
+@token_required
+def auth():
+    token = request.headers.get('token')
+    data=jwt.decode(token, app.config['SECRET_KEY'],algorithms=["HS256"])
+    return jsonify(data)
 
-@app.route('/protected')
+@app.route('/api/protected')
 @admin_required
 def protected():
-    token = request.args.get('token')
+    token = request.headers.get('token')
     data=jwt.decode(token, app.config['SECRET_KEY'],algorithms=["HS256"])
     user = User.objects(email=data['email'])[0]
     return jsonify({'message':'WELCOMEE I MISSED YOU'},user)
 
-@app.route("/login", methods=["POST"])
+@app.route("/api/login", methods=["POST"])
 def post_token():
     user_login=json.loads(request.data)
     email = user_login["email"]
     password = user_login["password"]
     if not User.valid_login(email, password):
         return {"error": "Invalid login credentials"}, 401
-    user_role= User.get_role(email)
+    user_role= User.getRole(email)
+    user_name=User.getName(email)
     token = jwt.encode(dict(
+        name=user_name,
         email = user_login['email'],
         role = user_role,
         exp= datetime.datetime.utcnow() + timedelta(minutes=60)
     
     ),app.config['SECRET_KEY'],algorithm='HS256')
-    return jsonify(token)
+    return jsonify({'token': token})
 
 

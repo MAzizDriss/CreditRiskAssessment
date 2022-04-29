@@ -18,7 +18,11 @@ class User(me.Document):
         else:
             for user in users:
                 return bcrypt.check_password_hash(user.password.encode('utf-8'),given_password.encode('utf-8'))
-    def get_role(given_email):
+    def getRole(given_email):
         users=User.objects(email=given_email)
         for user in users:
             return user.role
+    def getName(given_email):
+        users=User.objects(email=given_email)
+        for user in users:
+            return user.name

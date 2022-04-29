@@ -18,25 +18,25 @@ function HomeClient() {
 
     <div className='bord'>
       <div className='grid-container'>
-        <Link to='/c/account' className='grid-item'>
+        <Link to='/client/account' className='grid-item'>
          <img  className='im2'src={account}/>
           <h2 className='tx'>
             My account
           </h2>
         </Link>
-        <Link to='/c/balance' className='grid-item'>
+        <Link to='/client/balance' className='grid-item'>
           <img  className='im1'src={balance}/>
           <h2 className='tx'>
             My Balance
           </h2>
         </Link>
-        <Link to='/c/form' className='grid-item'>
+        <Link to='/client/form' className='grid-item'>
         <img  className='im'src={forms}/>
           <h2 className='tx'>
             Create loan demand
           </h2>
         </Link>
-        <Link to='/c/demands' className='grid-item'>
+        <Link to='/client/demands' className='grid-item'>
         <img  className='im3'src={list}/>
           <h2 className='tx'>
             List of demands

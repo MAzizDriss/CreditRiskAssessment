@@ -2,10 +2,12 @@ from flask import Flask
 from flask_bcrypt import Bcrypt
 import dns.resolver
 from flask_mongoengine import MongoEngine
+from flask_cors import CORS
 
 app = Flask(__name__)
 bcrypt=Bcrypt(app)
 app.config['SECRET_KEY']="testinggggggggggggggggg"
+CORS(app)
 
 
 
