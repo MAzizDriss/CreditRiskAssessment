@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import BankerUserForm from '../../../Components/BankerFrom/BankerUserForm'
+import RTable from '../../../Components/RequestTable/Table'
 import Dashboard from '../Dashboard'
 import DemandsList from '../DemandsList'
 import Inbox from '../Inbox'
@@ -22,6 +23,7 @@ const AdminRouter = () => {
                             <Route exact path='/admin/inbox' element={<Inbox />}></Route>
                             <Route exact path='/admin/account' element={<MyAccount />}></Route>
                             <Route exact path='/admin/clientform' element={<BankerUserForm />} />
+                            <Route exact path='/admin/table' element={<RTable/>} />
                         </Route>
                 </Routes>
             </Fragment>
