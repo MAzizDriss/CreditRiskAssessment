@@ -52,9 +52,9 @@
       outline:none; 
       background-color: #dbe9f4;
   }
-/* .name:hover{
+ .name:hover{
   box-shadow: inset 0px 0px 25px 0px rgba(66, 87, 107, 0.205);
-} */
+} 
 
 .email{
     height: 40px;
@@ -87,6 +87,9 @@
     font-size: 25px;
     border: none;
     cursor: pointer;
+}
+.button:hover {
+  box-shadow:  0px 5px 5px 5px rgba(195, 214, 175, 0.766);
 }
 .login-button{
     padding-top: 25px;

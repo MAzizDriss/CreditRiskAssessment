@@ -59,7 +59,8 @@ function Sidebar() {
           </Link>
           <h2 className='logo' >Online Tunisian Banking</h2>
           <div className='upbar avatar' >
-            <div className='avatar'><IconContext.Provider value={{size:'25px',color:'#fff'}}><IoIcons.IoIosArrowDown  onClick={handleClick}/></IconContext.Provider>
+            <div className='avatar'><IconContext.Provider value={{size:'25px',color:'#fff'}}>
+              <IoIcons.IoIosArrowDown  onClick={handleClick}/></IconContext.Provider>
        
       
               <Popover

@@ -1,7 +1,5 @@
-
-  
   .nav-menu {
-    background-color: #060b26;
+    background-color: #0e4064;
     z-index: 30;
     height: 100%;
     display: flex;
@@ -67,6 +65,7 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    position: fixed;
   }
   
   .sparta {
@@ -75,7 +74,7 @@
 
   }
   .upbar {
-    background-color: #060b26;
+    background-color: #0e4064;
     height: 70px;
     display: flex;
     justify-content: start;
@@ -105,10 +104,10 @@
     padding-top: 2px;
     width:45px;
     border-radius: 4px;
-    border: 2px solid #1a83ff ;
+    border: 2px solid #29597d;
   }
   .upbar.avatar:hover{
-    background-color: #1a83ff;
+    background-color: #29597d;
     
   }
 

@@ -41,6 +41,7 @@ const FORM_VALIDATION = Yup.object().shape({
 
 const age = getAge('Wed Apr 02 1999 14:09:50 GMT+0100 (GMT+01:00)')
 console.log(age)
+
 function ClientDemandeForm(handleClick) {
     const [selectedDate, handleDateChange] = useState();
     return <>

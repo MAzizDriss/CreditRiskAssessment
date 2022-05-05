@@ -6,11 +6,15 @@ import SelectWrapper from './SelectWrapper'
 import { Space, FormLabel} from './BFormElements'
 import {Container,Grid,TextField} from '@material-ui/core'
 import TextFieldWrapper from './TextFieldWrapper'
-import DatePicker from './DatePicker'
 import { loan_intent,home_ownership, ages } from './Data'
 import '../../Assets/css/form.css'
 import ButtonWrapper from './Button'
+import RadioWrapper from './RadioWrapper'
+import RTable from '../RequestTable/Table'
+import {Link } from 'react-router-dom'
+import DemandsList from '../../Pages/Admin/DemandsList'
 const INITIAL_FORM_STATE={
+
     firstName:'John',
     lastName:'Doe',
     email:'John@Doe.mail',
@@ -28,6 +32,11 @@ const INITIAL_FORM_STATE={
     files_verified:''
 
 }
+const typeItems = [
+        { id: 'treated', title: 'Treated' },
+        { id: 'in progress', title: 'In progress' },
+       
+    ]
 
 const FORM_VALIDATION = Yup.object().shape({
     firstName: Yup.string().required('Required !').min(2).max(30),
@@ -166,6 +175,13 @@ const BankerUserForm = () => {
                                 options={{true:'yes',false:'no'}}
                         />
                     </Grid>
+                   <Grid item xs={12}>
+                        <RadioWrapper
+                                name="status"
+                                label="Status"
+                                items={typeItems}
+                        />
+                    </Grid>
                     <FormLabel>
                         Statement of purpose
                    </FormLabel>
@@ -177,13 +193,15 @@ const BankerUserForm = () => {
                         rows={4}
                         />
                    </Grid>
-                   <Grid item xs={9}>
+                   <Grid item xs={11}>
                         <></>
                    </Grid>
-                    <Grid item xs={2}>
-                            <ButtonWrapper>
-                                    Submit
-                            </ButtonWrapper>
+                    <Grid item xs={1}>
+                         <Link to ="/admin/dlist" element= {<DemandsList/>}> 
+                                <ButtonWrapper>
+                                        Submit
+                                </ButtonWrapper>
+                          </Link>
                     </Grid>
                 </Grid>
             </Form>

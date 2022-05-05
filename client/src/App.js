@@ -34,7 +34,8 @@ const App =() => {
   }, [])
   
   return (   
-     role=='' ? <VisitorRouter/>:
+    
+    role=='' ? <VisitorRouter/>:
     <>
   {(role==="admin")?<AdminRouter/>:<ClientRouter/>}
     </>
