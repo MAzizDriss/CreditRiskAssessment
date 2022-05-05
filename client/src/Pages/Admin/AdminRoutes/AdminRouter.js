@@ -23,7 +23,7 @@ const AdminRouter = () => {
                             <Route exact path='/admin/inbox' element={<Inbox />}></Route>
                             <Route exact path='/admin/account' element={<MyAccount />}></Route>
                             <Route exact path='/admin/clientform' element={<BankerUserForm />} />
-                            <Route exact path='/admin/table' element={<RTable/>} />
+                            
                         </Route>
                 </Routes>
             </Fragment>

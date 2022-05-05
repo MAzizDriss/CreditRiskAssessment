@@ -12,6 +12,7 @@ import ButtonWrapper from './Button'
 import RadioWrapper from './RadioWrapper'
 import RTable from '../RequestTable/Table'
 import {Link } from 'react-router-dom'
+import DemandsList from '../../Pages/Admin/DemandsList'
 const INITIAL_FORM_STATE={
 
     firstName:'John',
@@ -192,11 +193,11 @@ const BankerUserForm = () => {
                         rows={4}
                         />
                    </Grid>
-                   <Grid item xs={9}>
+                   <Grid item xs={11}>
                         <></>
                    </Grid>
-                    <Grid item xs={2}>
-                         <Link to ="/admin/table" element= {<RTable/>}> 
+                    <Grid item xs={1}>
+                         <Link to ="/admin/dlist" element= {<DemandsList/>}> 
                                 <ButtonWrapper>
                                         Submit
                                 </ButtonWrapper>

@@ -49,7 +49,7 @@ export default function RTable() {
     }
     return (
         <div>
-            <Sidebar/> 
+           
             <Container  className="pagecontainer">
                 <Paper className="pageContent">
                     {/* <BankerUserForm/>  */}
