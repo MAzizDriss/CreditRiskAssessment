@@ -36,7 +36,20 @@ def admin_required(f):
             return jsonify({'message':'Token is invalid!!'}),403
         return f(*args, **kwargs)
     return decorated
-
+def client_required(f):
+    @wraps(f)
+    def decorated(*args,**kwargs):
+        token = request.headers.get('token')
+        if not token:
+            return jsonify({'message':'Token is missing!'}),403
+        try:
+            data=jwt.decode(token, app.config['SECRET_KEY'],algorithms=["HS256"])
+            if data['role']!='client':
+                return jsonify ({'message':'Denied Access!'}),403
+        except:
+            return jsonify({'message':'Token is invalid!!'}),403
+        return f(*args, **kwargs)
+    return decorated
 
                     
 
@@ -55,7 +68,7 @@ def auth():
     return jsonify(data)
 
 @app.route('/api/protected')
-@admin_required
+
 def protected():
     token = request.headers.get('token')
     data=jwt.decode(token, app.config['SECRET_KEY'],algorithms=["HS256"])
@@ -70,7 +83,7 @@ def post_token():
     if not User.valid_login(email, password):
         return {"error": "Invalid login credentials"}, 401
     user_role= User.getRole(email)
-    user_name=User.getName(email)
+    user_name=User.getEmail(email)
     token = jwt.encode(dict(
         name=user_name,
         email = user_login['email'],

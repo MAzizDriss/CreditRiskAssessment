@@ -23,7 +23,7 @@ const App =() => {
 
   const [role, setrole] = React.useState('')
   React.useEffect(() => {
-    axios.get('http://localhost:5000/api/auth', {
+    axios.get('http://127.0.0.1:5000/api/auth', {
       headers: {
         "token": localStorage.getItem('token')
       }
@@ -34,34 +34,34 @@ const App =() => {
   }, [])
   
   return (   
-    role=='' ? <VisitorRouter/>:
+     role=='' ? <VisitorRouter/>:
     <>
-    {(role==="admin")?<AdminRouter/>:<ClientRouter/>}
+  {(role==="admin")?<AdminRouter/>:<ClientRouter/>}
     </>
 
 
 
-    
-    // <Router>
-    //   <Fragment>
-    //   <Routes>
-    //      <Route exact path="/" element= {<WelcomePage/>}> </Route>
-    //      <Route exact path='/a/dash' element={<Dashboard/>}></Route>
-    //      <Route exact path='/a/list' element={<DemandsList/>}></Route>
-    //      <Route exact path='/a/inbox' element={<Inbox/>}></Route>
-    //      <Route exact path='/a/account' element={<MyAccount/>}></Route>
-    //      <Route exact path='/a' element={<ProtectedAdminRoute/>}>
-    //         <Route exact path='/a/form' element={<BankerUserForm/>}/>
-    //       </Route>
-    //      <Route exact path="/c/account" element= {<ClientAccount/>}> </Route>
-    //      <Route exact path="/c/balance" element= {<ClientBalance/>}> </Route>
-    //      <Route exact path="/c/demands" element= {<ClientDemands/>}> </Route>
-    //      <Route exact path="/c/form" element= {<DemandForm/>}></Route>
-    //      <Route exact path="/c/home" element= {<HomeClient/>}></Route>
-    //   </Routes>
-    //   </Fragment>
-    // </Router> 
-
+    /*
+    <Router>
+       <Fragment>
+  <Routes>
+    <Route exact path="/" element= {<WelcomePage/>}> </Route>
+     <Route exact path='/a/dash' element={<Dashboard/>}></Route>
+      <Route exact path='/a/list' element={<DemandsList/>}></Route>
+   <Route exact path='/a/inbox' element={<Inbox/>}></Route>
+      <Route exact path='/a/account' element={<MyAccount/>}></Route>
+    <Route exact path='/a' element={<ProtectedAdminRoute/>}>
+           <Route exact path='/a/form' element={<BankerUserForm/>}/>
+         </Route>
+          <Route exact path="/c/account" element= {<ClientAccount/>}> </Route>
+          <Route exact path="/c/balance" element= {<ClientBalance/>}> </Route>
+          <Route exact path="/c/demands" element= {<ClientDemands/>}> </Route>
+         <Route exact path="/c/form" element= {<DemandForm/>}></Route>
+          <Route exact path="/c/home" element= {<HomeClient/>}></Route>
+     </Routes>
+      </Fragment>
+     </Router> 
+*/
   );
 }
 

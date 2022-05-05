@@ -1,0 +1,51 @@
+
+.fl{
+    display: grid;
+    grid-template-columns: auto auto ;
+
+}
+.f{
+    display: flex;
+    
+}
+.rh{
+   margin-left: 100px;
+   font-size: 18px ;
+   color:white;
+   
+}
+.t{
+    color:white;
+    font-size: 18px ;
+  
+}
+.t1{
+    color:white;
+    font-size: 18px ;
+}
+.t2{
+    color:white;
+    font-size: 10px ;
+}
+.conta{
+    
+   margin-left: 20px;
+   margin-top:50px
+
+}
+.c1{
+
+margin-left: 40%;
+}
+.t3{
+    color:var(--light-blue);
+   
+}
+.rw{
+    background-color:black;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    width: 400px;
+    height: 2px;
+    margin-left: -4%;
+}
