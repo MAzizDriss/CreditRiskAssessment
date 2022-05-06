@@ -53,13 +53,9 @@ def update_user(user_id):
         return ("User Not Found", 404)
     else:
         user.update(email=user_data["email"],
-        firstname = user_data["firstname"],
-        lastname = user_data["lastname"],
-        cin=user_data["cin"],
-        rib=user_data["rib"],
         adress=user_data["adress"],
         phone=user_data["phone"],
-        password=user_data["password"])
+        )
         return("user is updated", 200)
 # Delete a user
 

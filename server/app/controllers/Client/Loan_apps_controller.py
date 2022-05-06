@@ -1,5 +1,4 @@
 
-
 from app.models.Loan_apps_Model import Loan_app
 from flask import request, jsonify
 import json
@@ -56,11 +55,12 @@ def get_apps_byid(userid):
 #         mail_status=app_data["mail_status"])
 #         return ("application is updated",200)
 
-# @app.route('/loanapp/delete/<userid>',methods=['DELETE'])
-# def delete_app(userid):
-#     app=Loan_app.objects(user_id=userid).first()
-#     if (not app):
-#         return ("application Not Found", 404)
-#     else:
-#         app.delete()
-#         return ("Successfuly deleted", 200)
+@app.route('/loanapp/delete/<userid>',methods=['DELETE'])
+#@client_required
+def delete_app(userid):
+    app=Loan_app.objects(user_id=userid).first()
+    if (not app):
+        return ("application Not Found", 404)
+    else:
+        app.delete()
+        return ("Successfuly deleted", 200)

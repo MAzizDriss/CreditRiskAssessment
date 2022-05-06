@@ -24,5 +24,7 @@ db.init_app(app)
 
 from app.controllers.Client import Loan_apps_controller
 from app.controllers.admin import admin_users_controller
+from app.controllers.admin import admin_loanapp_controller
+from app.controllers.Client import client_account_controller
 from app.controllers import auth_controller
 
