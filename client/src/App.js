@@ -23,7 +23,7 @@ const App =() => {
 
   const [role, setrole] = React.useState('')
   React.useEffect(() => {
-    axios.get('http://127.0.0.1:5000/api/auth', {
+    axios.get('http://localhost:5000/api/auth', {
       headers: {
         "token": localStorage.getItem('token')
       }
