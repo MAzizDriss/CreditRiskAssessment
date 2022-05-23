@@ -69,6 +69,7 @@ const BankerUserForm = () => {
         }
         validationSchema={FORM_VALIDATION}
         onSubmit={values => {
+        console.log('test')
             console.log(values)}
         }
         >
@@ -197,11 +198,11 @@ const BankerUserForm = () => {
                         <></>
                    </Grid>
                     <Grid item xs={1}>
-                         <Link to ="/admin/dlist" element= {<DemandsList/>}> 
+                         {/* <Link to ="/admin/dlist" element= {<DemandsList/>}>  */}
                                 <ButtonWrapper>
                                         Submit
                                 </ButtonWrapper>
-                          </Link>
+                          {/* </Link> */}
                     </Grid>
                 </Grid>
             </Form>

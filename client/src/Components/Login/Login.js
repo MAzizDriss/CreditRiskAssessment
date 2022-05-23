@@ -33,7 +33,6 @@ function Login() {
         (result) => {
             localStorage.setItem('token', result.data.token);
             localStorage.setItem('connected', true);
-            // window.alert("welcome Ye lrojla")
             document.location.reload(true)
         })
         .catch((err) => {

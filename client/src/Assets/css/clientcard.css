@@ -3,8 +3,8 @@
     padding-right: 200px;
 }
 .card-container{
-    margin-top: 70px;
-   max-width: 70%;
+    margin-top: 90px;
+    max-width: 70%;
     
     width:70%;
     padding:20px;
@@ -26,7 +26,7 @@
 .info{
     display:flex;
     flex-direction: row;
-    margin-top: 70px;
+    margin-top: 20px;
 }
 .details{
     padding-left: 150px;
@@ -37,7 +37,7 @@
 }
 .imgcnt{
     border-right:5px solid var(--light-blue);
-    height:200px;
+    height:400px;
     width: 50%;
     display: flex;
     justify-content: center;
@@ -55,4 +55,15 @@
     
     color:var(--green);
   
+}
+.card-header{
+    margin-top:-2px;
+    margin-bottom: -10px;
+    font-size: 26px;
+    color:var(--green);
+    
+}
+.card-subheader{
+    color:var(--dark-blue);
+    margin-right:10px;
 }

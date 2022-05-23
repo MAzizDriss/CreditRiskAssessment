@@ -13,7 +13,7 @@ import axios from 'axios'
 // import { Container } from './styles';
 
 function MyAccount() {
-  const [edit,setEdit]= useState(false)
+const [edit,setEdit]= useState(false)
 const [users,setUsers] = useState([])
 const handleClick = (event) => {
   setEdit(!edit);
@@ -33,7 +33,7 @@ useEffect(()=>{
 },[])
   return <div className='disp'>
  <Sidebar />
-  <div className='admincontainer'>
+  {/* <div className='admincontainer'> */}
   <Container maxWidth='false' className='card-container'>
         <div className='bluhd'>
           <h2 className='title'>My informations</h2>
@@ -47,57 +47,57 @@ useEffect(()=>{
           </div>
           
           <Grid container className='details'>
-          { edit ? <BankerAccountForm handleClick={handleClick} /> :<>
-            <Grid item xs={12}><h3> Account details</h3></Grid>
+          { edit ? <BankerAccountForm setedit={setEdit} /> :<>
+            <Grid item xs={12}><h3 className='card-header'> Account details</h3></Grid>
             <Grid  item xs={6}>
             <div className='itm'> 
-              <h5>ID Number</h5>  
-              <h6>: {users.cin}</h6>
+              <h4 className='card-subheader'>ID Number</h4>  
+              <h4>{users.cin}</h4>
             </div>
             </Grid>
             <Grid  item xs={6}>
             <div className='itm'> 
-              <h5>account number </h5>  
-              <h6>: {users.rib} </h6>
+              <h4 className='card-subheader'>Account Number </h4>  
+              <h4 >{users.rib} </h4>
             </div>
             </Grid>
-            <Grid xs={12}><h3>Personal details</h3></Grid>
+            <Grid xs={12}><h3 className='card-header'>Personal details</h3></Grid>
             <Grid xs={6}>
             <div className='itm'> 
-              <h5>First Name </h5>  
-              <h6>: {users.firstname}</h6>
+              <h4 className='card-subheader'>First Name </h4>  
+              <h4> {users.firstname}</h4>
             </div>
             </Grid>
             <Grid xs={6}>
             <div className='itm'> 
-              <h5>Last Name </h5>  
-              <h6>: {users.lastname}</h6>
+              <h4 className='card-subheader'>Last Name </h4>  
+              <h4> {users.lastname}</h4>
             </div>
             </Grid>
             
-            <Grid xs={4}>
+            <Grid xs={6}>
             <div className='itm'> 
-              <h5>Age</h5>  
-              <h6>: {users.age}</h6>
+              <h4 className='card-subheader'>Age</h4>  
+              <h4> {users.age}</h4>
             </div>
             </Grid>
            
             <Grid xs={6}>
             <div className='itm'> 
-              <h5>mobile </h5>  
-              <h6>: {users.phone}</h6>
+              <h4 className='card-subheader'>mobile </h4>  
+              <h4 > {users.phone}</h4>
             </div>
             </Grid>
             <Grid xs={6}>
             <div className='itm'> 
-              <h5>Adress</h5>  
-              <h6>:{users.adress}</h6>
+              <h4 className='card-subheader'>Adress</h4>  
+              <h4>{users.adress}</h4>
             </div>
             </Grid>
-             <Grid xs={12}>
+             <Grid xs={6}>
             <div className='itm'> 
-              <h5>Email</h5>  
-              <h6>: {users.email}</h6>
+              <h4 className='card-subheader'>Email</h4>  
+              <h4>{users.email}</h4>
             </div>
             </Grid>
             </>      
@@ -110,7 +110,7 @@ useEffect(()=>{
         
         </Container>
   </div>
-  </div>;
+  // </div>;
 }
 
 export default MyAccount;
