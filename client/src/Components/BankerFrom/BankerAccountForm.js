@@ -37,7 +37,7 @@ const FORM_VALIDATION = Yup.object().shape({
 
 
 })
-function ClientUserForm(handleClick) {
+function BankerAccountForm(handleClick) {
     const [selectedDate, handleDateChange] = useState()
 
     return <>
@@ -161,4 +161,4 @@ function ClientUserForm(handleClick) {
     </>;
 }
 
-export default ClientUserForm;
+export default BankerAccountForm;

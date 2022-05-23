@@ -16,6 +16,7 @@ def add_user():
     firstname = user_data["firstname"],
     lastname = user_data["lastname"],
     cin=user_data["cin"],
+    age=user_data["age"],
     rib=user_data["rib"],
     adress=user_data["adress"],
     phone=user_data["phone"])
@@ -55,6 +56,7 @@ def update_user(user_id):
         user.update(email=user_data["email"],
         adress=user_data["adress"],
         phone=user_data["phone"],
+        age=user_data["age"],
         )
         return("user is updated", 200)
 # Delete a user

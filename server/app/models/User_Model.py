@@ -9,7 +9,7 @@ class User(me.Document):
     lastname = me.StringField(required=True)
     cin=me.LongField(required=True)
     rib=me.LongField(required=True)
-    dob=me.DateField(default=datetime.datetime.utcnow)
+    age=me.IntField(required=True)
     adress=me.StringField(required=True)
     role=me.StringField(required=True)
     email = me.EmailField(required=True, unique=True)

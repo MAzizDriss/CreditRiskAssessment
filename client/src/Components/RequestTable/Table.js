@@ -13,7 +13,12 @@ import '../../Assets/css/Table.css'
 
 
 const rows = [
-    { id: 1, clientId:"10",loansId:"1111",status:"In progress"  },]
+    { id: 1, clientId:"10",loansId:"1126",status:"In progress"  },
+    {id: 1, clientId:"15",loansId:"1598",status:"Approved"  },
+    {id: 1, clientId:"500",loansId:"1783",status:"Refused"  },
+    {id: 1, clientId:"1700",loansId:"14523",status:"In progress"  },
+    {id: 1, clientId:"710",loansId:"1265",status:"Refused"  },
+]
 
 const headCells = [
     { id: 'clientId', label: 'Client_ID' },

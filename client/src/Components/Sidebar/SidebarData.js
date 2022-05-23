@@ -25,12 +25,7 @@ export const SidebarData = [
     icon: <IoIcons.IoMdPeople />,
     cName: 'nav-text'
   },
-  {
-    title: 'Inbox',
-    path: '/admin/inbox',
-    icon: <FaIcons.FaEnvelopeOpenText />,
-    cName: 'nav-text'
-  },
+  
   {
     title: 'Logout',
     path: '/',

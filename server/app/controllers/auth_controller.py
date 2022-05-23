@@ -73,7 +73,7 @@ def protected():
     token = request.headers.get('token')
     data=jwt.decode(token, app.config['SECRET_KEY'],algorithms=["HS256"])
     user = User.objects(email=data['email'])[0]
-    return jsonify({'message':'WELCOMEE I MISSED YOU'},user)
+    return jsonify(user)
 
 @app.route("/api/login", methods=["POST"])
 def post_token():
