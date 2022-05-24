@@ -86,7 +86,7 @@ function ClientDemandeForm(handleClick) {
                 }
             >
                 <Form>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={2} style={{marginTop:"-40px"}}>
                         <Grid item xs={12}>
                             <FormLabel>
                                 Your Details
