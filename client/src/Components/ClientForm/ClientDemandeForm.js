@@ -72,6 +72,7 @@ function ClientDemandeForm(handleClick) {
                 }
                 validationSchema={FORM_VALIDATION}
                 onSubmit={values => {
+                    console.log('here')
                     delete values.firstname
                     delete values.lastname
                     delete values.email
@@ -80,7 +81,7 @@ function ClientDemandeForm(handleClick) {
                     delete values.adress
                     delete values.phone
                     values.user_id=user._id.$oid
-                    values.rib=toString(user.rib)
+                    values.rib=user.rib.toString()
                     handleSubmit(values)
                     
                     

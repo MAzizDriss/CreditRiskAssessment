@@ -11,11 +11,13 @@ import { Grid } from '@mui/material';
 
 export default function ResultCard({ user, loan_data }) {
     return (
-        <Box sx={{ minWidth: 800, marginRight: '50px' }}>
+        
+        <Box sx={{ minWidth: 800, marginRight: '50%' }}>
+            {console.log(loan_data)}
             <Card variant="outlined">
                 <React.Fragment >
-                    <CardContent>
-                        <Grid container spacing={0}>
+                    <CardContent style={{padding:'5%'}}>
+                        <Grid container spacing={1}>
                             <Grid  item xs={12}>
                             <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                 {new Date().toString().substring(0, 16)}
@@ -31,28 +33,135 @@ export default function ResultCard({ user, loan_data }) {
                                 loan application id: {loan_data._id.$oid.substr(19, 5)}
                             </Typography>
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item xs={12}>
+                            <Typography variant="h5" component="div" style={{marginBottom:'5px',color:'var(--light-blue)'}}>
+                                    Client Information
+                            </Typography>
+                            </Grid>
+                            <Grid item xs={3}>
                                 <Typography variant="h6">
-                                    id:
+                                    cin:
                                 </Typography>
                             </Grid>
-                            <Grid item xs={10}>
-
+                            <Grid item xs={3}>
+                            <Typography variant="body1" style={{marginTop:'6px'}}> {user.cin}</Typography>
                             </Grid>
 
-                            <Grid item xs={2}>
+                            <Grid item xs={3}>
                             <Typography variant="h6">
                                 email:
                             </Typography>
                             </Grid>
-                            <Grid item xs={10}>
-                            <Typography variant="body1">{user.email}</Typography>
+                            <Grid item xs={3}>
+                            <Typography variant="body1" style={{marginTop:'6px'}}>{user.email}</Typography>
                             </Grid>
-    
+
+                            <Grid item xs={3}>
+                            <Typography variant="h6">
+                                phone:
+                            </Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="body1" style={{marginTop:'6px'}}>{user.phone}</Typography>
+                            </Grid>
+
+                            <Grid item xs={3}>
+                            <Typography variant="h6">
+                                age:
+                            </Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="body1" style={{marginTop:'6px'}}>{user.age}</Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="h6">
+                                annual income:
+                            </Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="body1" style={{marginTop:'6px'}}> {loan_data.annual_income}</Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="h6">
+                                Emplyment length:
+                            </Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="body1" style={{marginTop:'6px'}}> {loan_data.person_emp_length}</Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                            <Typography variant="h5" component="div" style={{marginTop:'40px',marginBottom:'5px',color:'var(--light-blue)'}}>
+                                    Loan Information
+                            </Typography>
+                            </Grid>
+
+                            <Grid item xs={3}>
+                            <Typography variant="h6">
+                                loan amount:
+                            </Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="body1" style={{marginTop:'6px'}}> {loan_data.loan_amnt}</Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="h6">
+                                loan interest rate:
+                            </Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="body1" style={{marginTop:'6px'}}> {loan_data.loan_interest_rate}</Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="h6">
+                                Loan term:
+                            </Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="body1" style={{marginTop:'6px'}}> {loan_data.loan_term}</Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="h6">
+                                Loan Grade:
+                            </Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="body1" style={{marginTop:'6px'}}> {loan_data.grade}</Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="h6">
+                                loan intent:
+                            </Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="body1" style={{marginTop:'6px'}}> {loan_data.loan_intent}</Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="h6">
+                                Home Ownership:
+                            </Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="body1" style={{marginTop:'6px'}}> {loan_data.home_ownership}</Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                            <Typography variant="h6">
+                                Defaulted before:
+                            </Typography>
+                            </Grid>
+                            <Grid item xs={9}>
+                            <Typography variant="body1" style={{marginTop:'6px'}}> {loan_data.dof}</Typography>
+                            </Grid>
                         </Grid>
+                        <Grid item xs={6} style={{marginTop:'30px'}}>
+                            <Typography variant="h6" style={{color:'var(--light-blue)',marginLeft:'63%'}}>
+                                Default probability:
+                            </Typography>
+                            </Grid>
+                        <Grid item xs={6} style={{marginLeft:'68%',fontSize:'64px', color:'red'}}>56%</Grid>
                     </CardContent>
-                    <CardActions>
-                        <Button size="small">Learn More</Button>
+                    <CardActions style={{marginLeft:'70%'}}>
+                        <Button >REFUSE</Button>
+                        <Button> APPROVE</Button>
                     </CardActions>
 
                 </React.Fragment></Card>

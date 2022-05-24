@@ -7,4 +7,4 @@ flask_cors
 numpy
 pandas
 sklearn
-xgboost
+xgboost==0.90
