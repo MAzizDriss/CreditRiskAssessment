@@ -3,7 +3,6 @@ from app.models.Loan_apps_Model import Loan_app
 from flask import request, jsonify
 import json
 from app.controllers.admin.functions import *
-import xgboost as xgb
 import pandas as pd
 from app import app
 from app.controllers.auth_controller import admin_required
@@ -60,6 +59,7 @@ def checkmodal():
     else: loan_status=0
     return ({"proba":str(Y_pred_proba[0,1]),"loan_status":str(loan_status)})
 
+
 @app.route('/admin/loanapp/update/<loanid>',methods=['PUT'])
 #@admin_required
 def update_loan(loanid):
@@ -70,12 +70,18 @@ def update_loan(loanid):
     else:
         loan_app.update(
         loan_interest_rate=app_data["loan_interest_rate"],
-        emp_id=app_data["emp_id"],
+        # emp_id=app_data["emp_id"],
         dof=app_data["dof"],
         status=app_data["status"],
         grade=app_data["grade"],
-        loan_status=app_data["loan_status"],
-        mail_status=app_data["mail_status"])
+        annual_income=app_data["annual_income"],
+        loan_amnt=app_data["loan_amnt"],
+        home_ownership=app_data["home_ownership"],
+        loan_intent=app_data["loan_intent"],
+        # loan_status=app_data["loan_status"],
+        mail_status=app_data["mail_status"],
+        loan_term=app_data["loan_term"]
+        )
     return ("application is updated",200)
 
 # modify loan app via the loanid

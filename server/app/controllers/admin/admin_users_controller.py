@@ -73,3 +73,8 @@ def delete_user(user_id):
         user.delete()
         return("Successfuly deleted", 200)
 
+@app.route('/user/get/<userid>',methods=['GET'])
+#@admin_required
+def get_useracc_byid(userid):
+    user= User.objects(user_id=userid)
+    return jsonify(user)

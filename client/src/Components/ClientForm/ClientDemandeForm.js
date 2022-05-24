@@ -67,6 +67,8 @@ function ClientDemandeForm(handleClick) {
                     home_ownership: 'RENT',
                     loan_intent: 'PERSONAL',
                     lnk: '',
+                    status:'',
+                    mail_status:'',
                 
                 }
                 }
@@ -82,6 +84,8 @@ function ClientDemandeForm(handleClick) {
                     delete values.phone
                     values.user_id=user._id.$oid
                     values.rib=user.rib.toString()
+                    values.status='In_Progress'
+                    values.mail_status='Not Sent'
                     handleSubmit(values)
                     
                     

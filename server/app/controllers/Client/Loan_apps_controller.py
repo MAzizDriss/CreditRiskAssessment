@@ -20,7 +20,9 @@ def add_app():
     home_ownership=app_data["home_ownership"],
     loan_intent=app_data["loan_intent"],
     lnk=app_data["lnk"],
-    rib=app_data["rib"])
+    rib=app_data["rib"],
+    mail_status=app_data["mail_status"],
+    status=app_data["status"])
     new_app.save()
     return (new_app.to_json())
 

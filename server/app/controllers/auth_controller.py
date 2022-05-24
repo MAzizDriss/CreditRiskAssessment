@@ -68,7 +68,6 @@ def auth():
     return jsonify(data)
 
 @app.route('/api/protected')
-
 def protected():
     token = request.headers.get('token')
     data=jwt.decode(token, app.config['SECRET_KEY'],algorithms=["HS256"])

@@ -30,13 +30,12 @@ const INITIAL_FORM_STATE={
     dof:false,
     home_ownership:'',
     age:'',
-    status:'Pending',
+    status:'In progress',
     mail_status:'Not sent',
     message:'',
     files_verified:''
 
 }
-
 
 const FORM_VALIDATION = Yup.object().shape({
     firstName: Yup.string().required('Required !').min(2).max(30),
@@ -50,13 +49,11 @@ const FORM_VALIDATION = Yup.object().shape({
     loan_intent:Yup.string().required('Required'),
     annual_income:Yup.number(),
     person_emp_length:Yup.number().integer().max(45),
-    dof:Yup.boolean().typeError('it is a boolean'),
+    dof:Yup.string(),
     home_ownership:Yup.string().min(2),
     age:Yup.number().integer().required('Required'),
     message:Yup.string(),
     files_verified:Yup.boolean().required('Required !')
-
-
 })
 
 const BankerUserForm = (props) => {
@@ -65,13 +62,14 @@ const BankerUserForm = (props) => {
 
       useEffect(() => {
         if (recordForEdit !== null)
- {           setValues({
+        {     setValues({
                 ...recordForEdit
             })
         
             fetch_client_data(recordForEdit.user_id.$oid)
             console.log(user)
-        }}, [recordForEdit])
+        }
+    }, [recordForEdit])
     
         const {
         values,
@@ -83,25 +81,6 @@ const BankerUserForm = (props) => {
     } = UseForm(INITIAL_FORM_STATE, true, FORM_VALIDATION);
 
 
-
-
-    const handleSubmit = e =>{
-            if (FORM_VALIDATION ){
-                {      
-                        axios.put(`http://localhost:5000/admin/loanapp/apps/${values._id}`,{
-                                'loan_interest_rate':values.loan_interest_rate,
-                               ' emp_id':values.emp_id,
-                                'dof':values.dof,
-                                'status':values.status,
-                                'mail_status':values.mail_status
-                        }).then(response => {
-                          console.log("element modifier et  enregistées dans la base de données ")
-                      }).catch(error => {
-                      
-                      console.log(error)
-                    })}
-            }
-    }
     const [user,setUser]= useState(null)
     const [showResults,setShowResults]=useState(false)
 
@@ -119,7 +98,6 @@ const BankerUserForm = (props) => {
 
   return (
       <>
-    
         <Container  className="Form-container">
        {user ? <>{
            !showResults? <Formik initialValues={{
@@ -139,17 +117,27 @@ const BankerUserForm = (props) => {
         validationSchema={FORM_VALIDATION}
         
         onSubmit={(values) => {  
-            setShowResults(true)
+            
             console.log('action performed')
-            // axios.put(`http://localhost:5000/admin/loanapp/update/${values._id.$oid}`,{
-            //     'loan_interest_rate':values.loan_interest_rate,
-            //     ' emp_id':values.emp_id,
-            //     'dof':values.dof,
-            //     'status':values.status,
-            //     'mail_status':values.mail_status
-            // })
+                axios.put(`http://localhost:5000/admin/loanapp/update/${values._id.$oid}`,{
+                    'loan_interest_rate':values.loan_interest_rate,
+                //    ' emp_id':emp._id.$oid,
+                    'dof':(values.dof).toString(),
+                    'status':(values.status).toString(),
+                    'mail_status':(values.mail_status).toString(),
+                    'grade':(values.grade).toString(),
+                    'annual_income':values.annual_income,
+                    'loan_amnt':values.loan_amnt,
+                    'home_ownership':(values.home_ownership).toString(),
+                    'loan_intent':(values.loan_intent ).toString (),
+                    'loan_term':values.loan_term
+            }).then(response => {
+                setShowResults(true)
+              console.log("element modifier et  enregistées dans la base de données ")
+          }).catch(error => {})
+        //   window.location.reload()
         }
-        }
+    }
         >
              <Form>
                 <Grid container spacing={2}>
@@ -257,13 +245,6 @@ const BankerUserForm = (props) => {
                             />
                     </Grid>
                     <Grid item xs={5}>
-                        <SelectWrapper
-                                name="files_verified"
-                                label="Files verified ?"
-                                options={{true:'yes',false:'no'}}
-                        />
-                    </Grid>
-                   <Grid item xs={2}>
                    <SelectWrapper
                             name="grade"
                             label="Loan Grade" 
@@ -271,32 +252,48 @@ const BankerUserForm = (props) => {
                         
                             />
                        </Grid>
-                       <Grid item xs={5}>
+                    <Grid item xs={7}>
+                        <TextFieldWrapper
+                                name="lnk"
+                                label="Drive Link for Required Documents" 
+                        
+                                />
+                    </Grid>
+                       
+                    <Grid item xs={5}>
+                        <SelectWrapper
+                                name="files_verified"
+                                label="Files verified ?"
+                                options={{true:'yes',false:'no'}}
+                        />
+                    </Grid>
+                   
+                       <Grid item xs={6}>
                    <SelectWrapper
                             name="mail_status"
                             label="Mail Status" 
-                            options={{true:'Sent',false:'Not sent'}}
+                            options={{Sent:'Sent',Not_Sent:'Not sent'}}
+
                         
                             />
                        </Grid>
-                       <Grid item xs={5}>
+                       <Grid item xs={6}>
                    <SelectWrapper
                             name="status"
                             label="Status" 
-                            options={{treated:'Treated',in_progress:'In Progress'}}
-                            
+                            options={{Approved:'Approved',In_Progress:'In Progress',Refused:'Refused'}}  
+                            disabled="true"
                             />
-                       
                     </Grid>
-                    
+
                    <Grid item xs={11}>
                         <></>
                    </Grid>
                     <Grid item xs={1}>
                          
-                                <ButtonWrapper >
-                                        Submit
-                                </ButtonWrapper>
+                        <ButtonWrapper >
+                            Submit
+                        </ButtonWrapper>
                         
                     </Grid>
                 </Grid>

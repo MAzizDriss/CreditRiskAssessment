@@ -11,6 +11,7 @@ import '../../Assets/css/Table.css'
 import axios from 'axios'
 import Button from '../Controls/Button';
 import  UseDialog from "./UseDialog";
+import ButtonTab from './ButtonTab'
 
 const rows = [
     { id: 1, clientId:"10",loansId:"1111",status:"In progress"  },]
@@ -25,8 +26,6 @@ const headCells = [
 ]
 
 export default function RTable() {
-
-    // const classes = useStyles();
     const [records, setRecords] = useState(rows)
     const [recordForEdit, setRecordForEdit] = useState(null)
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
@@ -34,7 +33,7 @@ export default function RTable() {
     const [OpenDialog, setOpenDialog] = useState(false)
     const [notify, setNotify] = useState({ isOpen: false, message: '', type: '' })
     const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: '', subTitle: '' })
-   
+    const [user,setUser]= useState(null)
     
     useEffect(() => {
         axios.get('http://localhost:5000/admin/loanapp/apps', {
@@ -44,10 +43,9 @@ export default function RTable() {
                 setRecords(data.data)
                 })
             .catch((err) => console.log(err))
+
     }, []);
-    // const handleEditButton =()=> {
-    //     setEdit(!edit)
-    // }
+   
     const {
         TblContainer,
         TblHead,
@@ -62,25 +60,21 @@ export default function RTable() {
                 if (target.value === "")
                     return items;
                 else
-                    return items.filter(x => x.fullName.toLowerCase().includes(target.value))
+                    return items.filter(x => x.rib.includes(target.value))
             }
         })
     }
-    // const addOrEdit = (resetForm) => {
-      
-    //     resetForm()
-    //     setRecordForEdit(null)
-    //     setOpenDialog(false)
-    //     axios.get('http://localhost:5000/employee')
-    //         .then(data => {console.log(data.data)
-    //             setRecords(data.data)
-    //             window.location.reload()})
-    //     setNotify({
-    //         isOpen: true,
-    //         message: 'Submitted Successfully',
-    //         type: 'success'
-    //     })
-    // }
+    const fetch_client_data = async (id)=>{
+        await axios.get(`http://localhost:5000/user/${id}`, {
+            headers: {
+              "token": localStorage.getItem('token')
+            }
+        }).then(
+            (res)=> {
+                setUser(res.data)
+                if (user) console.log(user)}
+        ).catch((err)=>console.log(err))
+    }
 
     const openInDialog = item => {
         
@@ -112,24 +106,19 @@ export default function RTable() {
                         <TableBody>
                             {
                                 recordsAfterPagingAndSorting().map(item =>
-                                    (<TableRow key={item._id}>
-                                        
+                                    (<TableRow key={item._id}>  
                                         <TableCell>{item.rib }</TableCell>
                                         <TableCell>{item._id ? (item._id.$oid).substr(19, 5):''}</TableCell>
-                                        
                                         <TableCell>{item.loan_intent}</TableCell>
                                         <TableCell>{item.mail_status}</TableCell>
                                         <TableCell>{item.status}</TableCell>
                                         <TableCell>                                     
-                                            <Button color="#0e4064" value="Open" onClick={() =>{
+                                            <ButtonTab Color='#0e4064' text="Open"  onClick={() =>{
                                                 console.log(item)
                                                 setEdit(true);
-                                            openInDialog(item) }}
+                                                openInDialog(item) }}
                                             >
-                
-                                            </Button>
-                                               
-                                                                                                                             
+                                            </ButtonTab>                                                                                 
                                         </TableCell>
                                     </TableRow>)
                                 )
@@ -145,7 +134,7 @@ export default function RTable() {
             >
                 <BankerUserForm
                      recordForEdit={recordForEdit}
-                     edit={edit}
+                     setEdit ={setEdit}
                />
             </UseDialog>
             </Container>

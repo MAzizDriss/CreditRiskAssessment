@@ -1,14 +1,14 @@
 
 .searchInput {
-    width: '80%'
+    width: 80%;
 }
 .pagecontainer{
-    padding: 8% 3% !important;
-    
-    box-shadow: '0 8px 16px 0 #7a7a7a';
+    padding: 3% 3% !important;
+    margin-top: 6%;
+    box-shadow: 0px 0px 5px 5px rgba(166, 185, 213, 0.766);
 }
 .pageContent{
-    padding:2%
+    padding:3%
 }
 @media screen and (max-width:768px) {
     .pagecontainer{
