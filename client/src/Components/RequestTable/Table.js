@@ -18,8 +18,8 @@ const rows = [
 const headCells = [
     { id: 'rib', label: 'Account_Number' },
     { id: '_id', label: 'Loan_Id' },
-    { id: 'loan_amnt', label: 'Loan_Amount' },
     { id: 'loan_intent', label: 'Loan_Intent' },
+    { id: 'mail_status', label: 'Mail_status' },
     { id: 'status', label: 'Status ' },
     { id: 'form', label: 'Form', disableSorting: true },  
 ]
@@ -45,9 +45,9 @@ export default function RTable() {
                 })
             .catch((err) => console.log(err))
     }, []);
-    const handleEditButton =()=> {
-        setEdit(!edit)
-    }
+    // const handleEditButton =()=> {
+    //     setEdit(!edit)
+    // }
     const {
         TblContainer,
         TblHead,
@@ -66,21 +66,21 @@ export default function RTable() {
             }
         })
     }
-    const addOrEdit = (resetForm) => {
+    // const addOrEdit = (resetForm) => {
       
-        resetForm()
-        setRecordForEdit(null)
-        setOpenDialog(false)
-        axios.get('http://localhost:5000/employee')
-            .then(data => {console.log(data.data)
-                setRecords(data.data)
-                window.location.reload()})
-        setNotify({
-            isOpen: true,
-            message: 'Submitted Successfully',
-            type: 'success'
-        })
-    }
+    //     resetForm()
+    //     setRecordForEdit(null)
+    //     setOpenDialog(false)
+    //     axios.get('http://localhost:5000/employee')
+    //         .then(data => {console.log(data.data)
+    //             setRecords(data.data)
+    //             window.location.reload()})
+    //     setNotify({
+    //         isOpen: true,
+    //         message: 'Submitted Successfully',
+    //         type: 'success'
+    //     })
+    // }
 
     const openInDialog = item => {
         
@@ -116,8 +116,9 @@ export default function RTable() {
                                         
                                         <TableCell>{item.rib }</TableCell>
                                         <TableCell>{item._id ? (item._id.$oid).substr(19, 5):''}</TableCell>
-                                        <TableCell>{item.loan_amnt}</TableCell>
+                                        
                                         <TableCell>{item.loan_intent}</TableCell>
+                                        <TableCell>{item.mail_status}</TableCell>
                                         <TableCell>{item.status}</TableCell>
                                         <TableCell>                                     
                                             <Button color="#0e4064" value="Open" onClick={() =>{

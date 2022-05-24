@@ -18,6 +18,7 @@ def update_loan(loanid):
         emp_id=app_data["emp_id"],
         dof=app_data["dof"],
         status=app_data["status"],
+        grade=app_data["grade"],
         loan_status=app_data["loan_status"],
         mail_status=app_data["mail_status"])
     return ("application is updated",200)

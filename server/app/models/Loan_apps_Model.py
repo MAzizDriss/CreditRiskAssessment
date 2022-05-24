@@ -15,6 +15,7 @@ class Loan_app(me.Document):
     emp_id=me.ObjectIdField()
     dof=me.IntField()
     status=me.StringField()
+    grade=me.StringField()
     loan_status=me.IntField()
     mail_status=me.IntField()
     file_status=me.IntField()

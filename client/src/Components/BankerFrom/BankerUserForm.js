@@ -120,7 +120,7 @@ const BankerUserForm = (props) => {
       <>
     
         <Container  className="Form-container">
-       {user? <Formik initialValues={{
+       {user ? <Formik initialValues={{
                 firstName:user.firstname,
                 lastName:user.lastname,
                 email:user.email,
@@ -134,8 +134,17 @@ const BankerUserForm = (props) => {
             ...recordForEdit}
         }
         validationSchema={FORM_VALIDATION}
-        onSubmit={values => {
-            console.log(values)}
+        
+        onSubmit={values => {  
+            
+            axios.put(`http://localhost:5000/admin/loanapp/update/${values._id.$oid}`,{
+                'loan_interest_rate':values.loan_interest_rate,
+                ' emp_id':values.emp_id,
+                'dof':values.dof,
+                'status':values.status,
+                'mail_status':values.mail_status
+            })
+        }
         }
         >
              <Form>
@@ -210,7 +219,7 @@ const BankerUserForm = (props) => {
                     <TextFieldWrapper
                             name="annual_income"
                             label="Annual Income declared" 
-                            disabled="true"
+                            
                             />
                     </Grid>
                     <Grid item xs={5}>
@@ -218,14 +227,14 @@ const BankerUserForm = (props) => {
                             name="loan_intent"
                             label="Loan Intent " 
                             options={loan_intent}
-                            disabled="true"
+                           
                             />
                     </Grid>
                     <Grid item xs={7}>
                     <TextFieldWrapper
                             name="person_emp_length"
                             label="Employement length" 
-                            disabled="true"
+                       
                             />
                     </Grid>
                     <Grid item xs={5}>
@@ -240,7 +249,7 @@ const BankerUserForm = (props) => {
                             name="home_ownership"
                             label="Ownership of home" 
                             options={home_ownership}
-                            disabled="true"
+                           
                             />
                     </Grid>
                     <Grid item xs={5}>
@@ -275,26 +284,16 @@ const BankerUserForm = (props) => {
                             />
                        
                     </Grid>
-                    <FormLabel>
-                        Statement of purpose
-                   </FormLabel>
-                   <Grid item xs={12}>
-                        <TextFieldWrapper
-                        name="message"
-                        label="Statement Of Purpose"
-                        multiline={true}
-                        rows={4}
-                        />
-                   </Grid>
+                    
                    <Grid item xs={11}>
                         <></>
                    </Grid>
                     <Grid item xs={1}>
-                         <Link to ="/admin/dlist" element= {<DemandsList/>}> 
+                         
                                 <ButtonWrapper>
                                         Submit
                                 </ButtonWrapper>
-                          </Link>
+                        
                     </Grid>
                 </Grid>
             </Form>
