@@ -5,3 +5,6 @@ pyjwt
 flask_bcrypt
 flask_cors
 numpy
+pandas
+sklearn
+xgboost
