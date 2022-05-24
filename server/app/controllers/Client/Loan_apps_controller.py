@@ -1,5 +1,6 @@
 
 from app.models.Loan_apps_Model import Loan_app
+from app.models.User_Model import User
 from flask import request, jsonify
 import json
 from app import app
@@ -9,15 +10,16 @@ from app.controllers.auth_controller import client_required
 #@client_required
 def add_app():
     app_data=json.loads(request.data)
+    print(User.objects(id=app_data["user_id"]).first().id)
     new_app=Loan_app(
-    user_id=app_data["user_id"],
+    user_id=User.objects(id=app_data["user_id"]).first().id,
     age=app_data['age'],
     annual_income=app_data["annual_income"],
     person_emp_length=app_data["person_emp_length"],
     loan_amnt=app_data["loan_amnt"],
     home_ownership=app_data["home_ownership"],
     loan_intent=app_data["loan_intent"],
-    lnk=app_data["lnk"],
+    lnk=app_data["lnk"]
     rib=app_data["rib"])
     new_app.save()
     return (new_app.to_json())

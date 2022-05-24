@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { FormLabel } from '../BankerFrom/BFormElements'
@@ -8,29 +8,11 @@ import { home_ownership, getAge, loan_intent } from './Data';
 import SelectWrapper from '../BankerFrom/SelectWrapper'
 import '../../Assets/css/form.css'
 import ButtonWrapper from '../BankerFrom/Button'
+import axios from 'axios';
 // import { Container } from './styles';
-const INITIAL_FORM_STATE = {
-    username: 'johndoe',
-    rib: '1234567891234567',
-    cin: '11858290',
-    adress: '',
-    email: 'John@Doe.mail',
-    phone: "56160606",
-    age: getAge('Wed Apr 02 1999 14:09:50 GMT+0100 (GMT+01:00)'),
-    annual_income: '', 
-    person_emp_length: '',
-    loan_amnt: '',
-    home_ownership: 'RENT',
-    loan_intent: 'PERSONAL',
-    lnk: '',
 
-
-}
 const FORM_VALIDATION = Yup.object().shape({
-    email: Yup.string().email('Invalid email!').required('Required'),
-    phone: Yup.number().integer().typeError('Please enter a valid phone number!').required('Required!')
-        .moreThan(9999999, 'Please enter a valid phone number!').lessThan(99999999, 'Please enter a valid phone number!'),
-    adress: Yup.string().required('Required'),
+    age: Yup.number().required('Required'),
     home_ownership:Yup.string().min(2),
     person_emp_length:Yup.number().integer().max(45).required('Required'),
     loan_intent:Yup.string().required('Required'),
@@ -39,21 +21,67 @@ const FORM_VALIDATION = Yup.object().shape({
     lnk:Yup.string().required("Required")
 })
 
-const age = getAge('Wed Apr 02 1999 14:09:50 GMT+0100 (GMT+01:00)')
-console.log(age)
 
 function ClientDemandeForm(handleClick) {
-    const [selectedDate, handleDateChange] = useState();
+
+    const [user,setUser]=useState(null)
+    useEffect(
+        ()=> {fetch_client_data()}
+        ,[]
+    )
+
+    const fetch_client_data = async ()=>{
+        await axios.get('http://localhost:5000/api/protected', {
+            headers: {
+              "token": localStorage.getItem('token')
+            }
+        }).then(
+            (res)=> {
+                setUser(res.data)
+                if (user) console.log(user)}
+        ).catch((err)=>console.log(err))
+    }
+
+    const handleSubmit= async (values)=>{
+        await axios.post('http://localhost:5000/loanapp/add',values).then(
+            (res)=> {console.log(res.data)
+                window.location.replace("http://localhost:3000/client/demands");}
+        ).catch(err => console.log(err.data))
+    }
     return <>
         <Container >
-            <Formik
+{       user?     <Formik
                 initialValues={{
-                    ...INITIAL_FORM_STATE
+                    firstname:user.firstname,
+                    lastname:user.lastname,
+                    adress:user.adress,
+                    rib:user.rib,
+                    cin:user.cin,
+                    age:user.age,
+                    email:user.email,
+                    phone:user.phone,
+                    annual_income: '', 
+                    person_emp_length: '',
+                    loan_amnt: '',
+                    home_ownership: 'RENT',
+                    loan_intent: 'PERSONAL',
+                    lnk: '',
+                
                 }
                 }
                 validationSchema={FORM_VALIDATION}
                 onSubmit={values => {
-                    console.log(values)
+                    delete values.firstname
+                    delete values.lastname
+                    delete values.email
+                    delete values.rib
+                    delete values.cin
+                    delete values.adress
+                    delete values.phone
+                    values.user_id=user._id.$oid
+                    handleSubmit(values)
+                    
+                    
                 }
                 }
             >
@@ -64,50 +92,60 @@ function ClientDemandeForm(handleClick) {
                                 Your Details
                             </FormLabel>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={6}>
                             <TextFieldWrapper
                                 disabled
-                                name="username"
-                                label="UserName"
+                                name="firstname"
+                                label="First Name"
                             />
                         </Grid>
                         <Grid item xs={6}>
+                            <TextFieldWrapper
+                                disabled
+                                name="lastname"
+                                label="Last Name"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
                             <TextFieldWrapper
                                 disabled
                                 name="rib"
                                 label="Account Number"
                             />
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={12}>
+                            <TextFieldWrapper
+                                disabled
+                                name="email"
+                                label="E-mail"
+                            />
+                        </Grid>
+                        <Grid item xs={5}>
                             <TextFieldWrapper
                                 disabled
                                 name="cin"
                                 label="ID Number"
                             />
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item xs={1}>
                             <TextFieldWrapper
                                 disabled
                                 name="age"
                                 label="Age"
                             />
                         </Grid>
-                        <Grid item xs={10}>
+                        <Grid item xs={7}>
                             <TextFieldWrapper
-                                name="email"
-                                label="E-mail"
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextFieldWrapper
+                                disabled
                                 name="phone"
                                 label="Phone Number"
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={5}>
                             <TextFieldWrapper
+                                disabled
                                 name="adress"
-                                label="Adress"
+                                label="Address"
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -165,9 +203,10 @@ function ClientDemandeForm(handleClick) {
                         </Grid>
                     </Grid>
                 </Form>
-            </Formik>
+            </Formik>:<>Loading the data ...</>}
         </Container>
     </>;
 }
+
 
 export default ClientDemandeForm;

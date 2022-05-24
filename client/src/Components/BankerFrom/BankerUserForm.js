@@ -65,9 +65,13 @@ const BankerUserForm = (props) => {
 
       useEffect(() => {
         if (recordForEdit !== null)
-            setValues({
+ {           setValues({
                 ...recordForEdit
-            })}, [recordForEdit])
+            })
+        
+            fetch_client_data(recordForEdit.user_id.$oid)
+            console.log(user)
+        }}, [recordForEdit])
     
         const {
         values,
@@ -77,6 +81,10 @@ const BankerUserForm = (props) => {
         handleInputChange,
         resetForm
     } = UseForm(INITIAL_FORM_STATE, true, FORM_VALIDATION);
+
+
+
+
     const handleSubmit = e =>{
             if (FORM_VALIDATION ){
                 {      
@@ -94,11 +102,35 @@ const BankerUserForm = (props) => {
                     })}
             }
     }
+    const [user,setUser]= useState(null)
+
+    const fetch_client_data = async (id)=>{
+        await axios.get(`http://localhost:5000/user/${id}`, {
+            headers: {
+              "token": localStorage.getItem('token')
+            }
+        }).then(
+            (res)=> {
+                setUser(res.data)
+                if (user) console.log(user)}
+        ).catch((err)=>console.log(err))
+    }
+
   return (
       <>
     
         <Container  className="Form-container">
-        <Formik initialValues={{
+       {user? <Formik initialValues={{
+                firstName:user.firstname,
+                lastName:user.lastname,
+                email:user.email,
+                phone:user.phone,
+                age:user.age,
+                files_verified:false,
+                grade:'A',
+                mail_status:false,
+                status:"in_progress",
+
             ...recordForEdit}
         }
         validationSchema={FORM_VALIDATION}
@@ -230,8 +262,7 @@ const BankerUserForm = (props) => {
                    <SelectWrapper
                             name="mail_status"
                             label="Mail Status" 
-                            options={{sent:'Sent',not_sent:'Not sent'}}
-                            defaultValue='Not sent'
+                            options={{true:'Sent',false:'Not sent'}}
                         
                             />
                        </Grid>
@@ -267,7 +298,7 @@ const BankerUserForm = (props) => {
                     </Grid>
                 </Grid>
             </Form>
-        </Formik>
+        </Formik>:<>Loading...</>}
     </Container>
     <Space/>
     </>

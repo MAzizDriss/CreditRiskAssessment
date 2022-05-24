@@ -120,7 +120,10 @@ export default function RTable() {
                                         <TableCell>{item.loan_intent}</TableCell>
                                         <TableCell>{item.status}</TableCell>
                                         <TableCell>                                     
-                                            <Button color="#0e4064" value="Open" onClick={() =>{ setEdit(true);openInDialog(item) }}
+                                            <Button color="#0e4064" value="Open" onClick={() =>{
+                                                console.log(item)
+                                                setEdit(true);
+                                            openInDialog(item) }}
                                             >
                 
                                             </Button>
