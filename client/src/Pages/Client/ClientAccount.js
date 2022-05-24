@@ -36,7 +36,7 @@ useEffect(()=>{
   {/* <div className='admincontainer'> */}
   <Container maxWidth='false' className='card-container'>
         <div className='bluhd'>
-          <h2 className='title'>My informations</h2>
+          <h2 className='title'>My information</h2>
           {!edit?<Fab className='bttn' size="medium" color="false" onClick={handleClick} aria-label="add" >
              <EditIcon/></Fab>:<></>}
         </div>
@@ -90,7 +90,7 @@ useEffect(()=>{
             </Grid>
             <Grid xs={6}>
             <div className='itm'> 
-              <h4 className='card-subheader'>Adress</h4>  
+              <h4 className='card-subheader'>Address</h4>  
               <h4>{users.adress}</h4>
             </div>
             </Grid>

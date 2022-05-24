@@ -10,9 +10,9 @@ import { loan_intent,home_ownership, ages ,grade} from './Data'
 import '../../Assets/css/form.css'
 import ButtonWrapper from './Button'
 import {Link } from 'react-router-dom'
-import DemandsList from '../../Pages/Admin/DemandsList'
 import UseForm from './UseForm'
 import axios from 'axios'
+import ResultCard from '../ResultCard/ResultCard'
 
 
 const INITIAL_FORM_STATE={
@@ -27,7 +27,7 @@ const INITIAL_FORM_STATE={
     loan_intent:'',
     annual_income:'',
     person_emp_length:'',
-    dof:'',
+    dof:false,
     home_ownership:'',
     age:'',
     status:'Pending',
@@ -103,6 +103,7 @@ const BankerUserForm = (props) => {
             }
     }
     const [user,setUser]= useState(null)
+    const [showResults,setShowResults]=useState(false)
 
     const fetch_client_data = async (id)=>{
         await axios.get(`http://localhost:5000/user/${id}`, {
@@ -120,7 +121,8 @@ const BankerUserForm = (props) => {
       <>
     
         <Container  className="Form-container">
-       {user ? <Formik initialValues={{
+       {user ? <>{
+           !showResults? <Formik initialValues={{
                 firstName:user.firstname,
                 lastName:user.lastname,
                 email:user.email,
@@ -128,6 +130,7 @@ const BankerUserForm = (props) => {
                 age:user.age,
                 files_verified:false,
                 grade:'A',
+                dof:false,
                 mail_status:false,
                 status:"in_progress",
 
@@ -135,15 +138,16 @@ const BankerUserForm = (props) => {
         }
         validationSchema={FORM_VALIDATION}
         
-        onSubmit={values => {  
-            
-            axios.put(`http://localhost:5000/admin/loanapp/update/${values._id.$oid}`,{
-                'loan_interest_rate':values.loan_interest_rate,
-                ' emp_id':values.emp_id,
-                'dof':values.dof,
-                'status':values.status,
-                'mail_status':values.mail_status
-            })
+        onSubmit={(values) => {  
+            setShowResults(true)
+            console.log('action performed')
+            // axios.put(`http://localhost:5000/admin/loanapp/update/${values._id.$oid}`,{
+            //     'loan_interest_rate':values.loan_interest_rate,
+            //     ' emp_id':values.emp_id,
+            //     'dof':values.dof,
+            //     'status':values.status,
+            //     'mail_status':values.mail_status
+            // })
         }
         }
         >
@@ -290,14 +294,14 @@ const BankerUserForm = (props) => {
                    </Grid>
                     <Grid item xs={1}>
                          
-                                <ButtonWrapper>
+                                <ButtonWrapper >
                                         Submit
                                 </ButtonWrapper>
                         
                     </Grid>
                 </Grid>
             </Form>
-        </Formik>:<>Loading...</>}
+        </Formik>:<ResultCard loan_data={values} user={user}/>}</>:<>Loading...</>}
     </Container>
     <Space/>
     </>

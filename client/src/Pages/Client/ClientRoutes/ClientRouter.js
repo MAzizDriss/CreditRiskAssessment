@@ -6,6 +6,7 @@ import ClientDemands from '../ClientDemands'
 import DemandForm from '../DemandForm'
 import HomeClient from '../HomeClient'
 import ProtectedClientRoute from './ProtectedRoute'
+import ResultCard from '../../../Components/ResultCard/ResultCard'
 
 const ClientRouter = () => {
     return (
@@ -21,6 +22,7 @@ const ClientRouter = () => {
                         <Route exact path="/client/demands" element={<ClientDemands />}> </Route>
                         <Route exact path="/client/form" element={<DemandForm />}></Route>
                         <Route exact path="/client/home" element={<HomeClient />}></Route>
+                        <Route exact path="/client/result" element={<ResultCard/>}></Route>
                     </Route>
                 </Routes>
             </Fragment>

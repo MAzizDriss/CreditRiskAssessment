@@ -16,7 +16,7 @@ const FORM_VALIDATION = Yup.object().shape({
     email: Yup.string().required('Email is required').email('Invalid email!'),
     phone: Yup.number().required('Phone is required').integer().typeError('Please enter a valid phone number!')
         .moreThan(9999999, 'Please enter a valid phone number!').lessThan(99999999, 'Please enter a valid phone number!'),
-    rib: Yup.string().required('account number is required').length(13),
+    rib: Yup.string().required('account number is required'),
     cin: Yup.string().required('Id number is required').length(8),
     adress: Yup.string().required('adress is required'),
     age:Yup.number().required('age is required').min(18).max(100)
@@ -120,7 +120,7 @@ function ClientUserForm({setedit,data}) {
                         <Grid item xs={6}>
                             <TextFieldWrapper
                                 name="adress"
-                                label="Adress"
+                                label="Address"
                                 
                             />
                         </Grid>

@@ -3,7 +3,7 @@ import { Outlet, Navigate } from 'react-router-dom'
 import axios from 'axios';
 const ProtectedClientRoute = () => {
 
-    const [role, setrole] = React.useState("")
+    const [role, setrole] = React.useState("client")
     React.useEffect(() => {
         axios.get('http://localhost:5000/api/auth', {
             headers: {

@@ -18,7 +18,8 @@ const FORM_VALIDATION = Yup.object().shape({
     loan_intent:Yup.string().required('Required'),
     annual_income:Yup.number().required('Required'),
     loan_amnt:Yup.number().min(500).typeError('Please enter a valid number').required('Required!'),
-    lnk:Yup.string().required("Required")
+    lnk:Yup.string().required("Required"),
+    rib:Yup.string()
 })
 
 
@@ -79,6 +80,7 @@ function ClientDemandeForm(handleClick) {
                     delete values.adress
                     delete values.phone
                     values.user_id=user._id.$oid
+                    values.rib=toString(user.rib)
                     handleSubmit(values)
                     
                     
