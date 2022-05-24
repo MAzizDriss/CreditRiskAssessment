@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import {Formik, Form} from 'formik'
 import * as Yup from 'yup'
 import Sidebar from '../Sidebar/Sidebar'
@@ -6,19 +6,21 @@ import SelectWrapper from './SelectWrapper'
 import { Space, FormLabel} from './BFormElements'
 import {Container,Grid,TextField} from '@material-ui/core'
 import TextFieldWrapper from './TextFieldWrapper'
-import { loan_intent,home_ownership, ages } from './Data'
+import { loan_intent,home_ownership, ages ,grade} from './Data'
 import '../../Assets/css/form.css'
 import ButtonWrapper from './Button'
-import RadioWrapper from './RadioWrapper'
-import RTable from '../RequestTable/Table'
 import {Link } from 'react-router-dom'
 import DemandsList from '../../Pages/Admin/DemandsList'
+import UseForm from './UseForm'
+import axios from 'axios'
+
+
 const INITIAL_FORM_STATE={
 
-    firstName:'John',
-    lastName:'Doe',
-    email:'John@Doe.mail',
-    phone:"56160606",
+    firstName:'',
+    lastName:'',
+    email:'',
+    phone:"",
     loan_amnt:'',
     loan_term:'',
     loan_interest_rate:'',
@@ -27,16 +29,14 @@ const INITIAL_FORM_STATE={
     person_emp_length:'',
     dof:'',
     home_ownership:'',
-    age:30,
+    age:'',
+    status:'Pending',
+    mail_status:'Not sent',
     message:'',
     files_verified:''
 
 }
-const typeItems = [
-        { id: 'treated', title: 'Treated' },
-        { id: 'in progress', title: 'In progress' },
-       
-    ]
+
 
 const FORM_VALIDATION = Yup.object().shape({
     firstName: Yup.string().required('Required !').min(2).max(30),
@@ -59,17 +59,50 @@ const FORM_VALIDATION = Yup.object().shape({
 
 })
 
-const BankerUserForm = () => {
+const BankerUserForm = (props) => {
+
+     const {recordForEdit,edit } = props
+
+      useEffect(() => {
+        if (recordForEdit !== null)
+            setValues({
+                ...recordForEdit
+            })}, [recordForEdit])
+    
+        const {
+        values,
+        setValues,
+        errors,
+        setErrors,
+        handleInputChange,
+        resetForm
+    } = UseForm(INITIAL_FORM_STATE, true, FORM_VALIDATION);
+    const handleSubmit = e =>{
+            if (FORM_VALIDATION ){
+                {      
+                        axios.put(`http://localhost:5000/admin/loanapp/apps/${values._id}`,{
+                                'loan_interest_rate':values.loan_interest_rate,
+                               ' emp_id':values.emp_id,
+                                'dof':values.dof,
+                                'status':values.status,
+                                'mail_status':values.mail_status
+                        }).then(response => {
+                          console.log("element modifier et  enregistées dans la base de données ")
+                      }).catch(error => {
+                      
+                      console.log(error)
+                    })}
+            }
+    }
   return (
       <>
-      <Sidebar/>
+    
         <Container  className="Form-container">
         <Formik initialValues={{
-            ...INITIAL_FORM_STATE}
+            ...recordForEdit}
         }
         validationSchema={FORM_VALIDATION}
         onSubmit={values => {
-        console.log('test')
             console.log(values)}
         }
         >
@@ -85,24 +118,28 @@ const BankerUserForm = () => {
                             
                             name="firstName"
                             label="First Name" 
+                            disabled="true"
                             />
                     </Grid>
                     <Grid item xs={6}>
                     <TextFieldWrapper
                             name="lastName"
                             label="Last Name"
+                            disabled="true"
                             />
                     </Grid>
                     <Grid item xs={12}>
                     <TextFieldWrapper
                             name="email"
                             label="E-mail" 
+                            disabled="true"
                             />
                     </Grid>
                     <Grid item xs={10}>
                     <TextFieldWrapper
                             name="phone"
                             label="Phone Number" 
+                            disabled="true"
                             />
                     </Grid>
                     <Grid item xs={2}>
@@ -110,6 +147,7 @@ const BankerUserForm = () => {
                             name="age"
                             label="Age" 
                             options={ages}
+                            disabled="true"
                             />
                     </Grid>
                     <Grid item xs={12}>
@@ -140,6 +178,7 @@ const BankerUserForm = () => {
                     <TextFieldWrapper
                             name="annual_income"
                             label="Annual Income declared" 
+                            disabled="true"
                             />
                     </Grid>
                     <Grid item xs={5}>
@@ -147,12 +186,14 @@ const BankerUserForm = () => {
                             name="loan_intent"
                             label="Loan Intent " 
                             options={loan_intent}
+                            disabled="true"
                             />
                     </Grid>
                     <Grid item xs={7}>
                     <TextFieldWrapper
                             name="person_emp_length"
                             label="Employement length" 
+                            disabled="true"
                             />
                     </Grid>
                     <Grid item xs={5}>
@@ -167,6 +208,7 @@ const BankerUserForm = () => {
                             name="home_ownership"
                             label="Ownership of home" 
                             options={home_ownership}
+                            disabled="true"
                             />
                     </Grid>
                     <Grid item xs={5}>
@@ -176,12 +218,31 @@ const BankerUserForm = () => {
                                 options={{true:'yes',false:'no'}}
                         />
                     </Grid>
-                   <Grid item xs={12}>
-                        <RadioWrapper
-                                name="status"
-                                label="Status"
-                                items={typeItems}
-                        />
+                   <Grid item xs={2}>
+                   <SelectWrapper
+                            name="grade"
+                            label="Loan Grade" 
+                            options={grade}
+                        
+                            />
+                       </Grid>
+                       <Grid item xs={5}>
+                   <SelectWrapper
+                            name="mail_status"
+                            label="Mail Status" 
+                            options={{sent:'Sent',not_sent:'Not sent'}}
+                            defaultValue='Not sent'
+                        
+                            />
+                       </Grid>
+                       <Grid item xs={5}>
+                   <SelectWrapper
+                            name="status"
+                            label="Status" 
+                            options={{treated:'Treated',in_progress:'In Progress'}}
+                            
+                            />
+                       
                     </Grid>
                     <FormLabel>
                         Statement of purpose
@@ -198,11 +259,11 @@ const BankerUserForm = () => {
                         <></>
                    </Grid>
                     <Grid item xs={1}>
-                         {/* <Link to ="/admin/dlist" element= {<DemandsList/>}>  */}
+                         <Link to ="/admin/dlist" element= {<DemandsList/>}> 
                                 <ButtonWrapper>
                                         Submit
                                 </ButtonWrapper>
-                          {/* </Link> */}
+                          </Link>
                     </Grid>
                 </Grid>
             </Form>

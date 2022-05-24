@@ -1,10 +1,10 @@
 
 .searchInput {
-    width: '75%'
+    width: '80%'
 }
 .pagecontainer{
     padding: 8% 3% !important;
-    /* margin: 8% 5% ; */
+    
     box-shadow: '0 8px 16px 0 #7a7a7a';
 }
 .pageContent{

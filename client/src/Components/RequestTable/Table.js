@@ -1,28 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import BankerUserForm from '../BankerFrom/BankerUserForm';
 import { Paper, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
 import useTable from "./UseTable";
-import {  Search } from "@material-ui/icons";
+import {  LiveTv, Search } from "@material-ui/icons";
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import Controls from '../Controls/Controls';
-import Sidebar from '../Sidebar/Sidebar';
 import {Container} from '@material-ui/core'
 import {Link } from 'react-router-dom'
 import '../../Assets/css/Table.css'
-
-
+import axios from 'axios'
+import Button from '../Controls/Button';
+import  UseDialog from "./UseDialog";
 
 const rows = [
-    { id: 1, clientId:"10",loansId:"1126",status:"In progress"  },
-    {id: 1, clientId:"15",loansId:"1598",status:"Approved"  },
-    {id: 1, clientId:"500",loansId:"1783",status:"Refused"  },
-    {id: 1, clientId:"1700",loansId:"14523",status:"In progress"  },
-    {id: 1, clientId:"710",loansId:"1265",status:"Refused"  },
-]
+    { id: 1, clientId:"10",loansId:"1111",status:"In progress"  },]
 
 const headCells = [
-    { id: 'clientId', label: 'Client_ID' },
-    { id: 'loansId', label: 'Loan_ID' },
+    { id: 'rib', label: 'Account_Number' },
+    { id: '_id', label: 'Loan_Id' },
+    { id: 'loan_amnt', label: 'Loan_Amount' },
+    { id: 'loan_intent', label: 'Loan_Intent' },
     { id: 'status', label: 'Status ' },
     { id: 'form', label: 'Form', disableSorting: true },  
 ]
@@ -31,9 +28,26 @@ export default function RTable() {
 
     // const classes = useStyles();
     const [records, setRecords] = useState(rows)
+    const [recordForEdit, setRecordForEdit] = useState(null)
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
+    const [edit,setEdit]= useState(false)
+    const [OpenDialog, setOpenDialog] = useState(false)
+    const [notify, setNotify] = useState({ isOpen: false, message: '', type: '' })
+    const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: '', subTitle: '' })
+   
     
-    
+    useEffect(() => {
+        axios.get('http://localhost:5000/admin/loanapp/apps', {
+            headers: {
+                "auth-token": localStorage.getItem('token')}
+            }).then(data => {console.log(data.data)
+                setRecords(data.data)
+                })
+            .catch((err) => console.log(err))
+    }, []);
+    const handleEditButton =()=> {
+        setEdit(!edit)
+    }
     const {
         TblContainer,
         TblHead,
@@ -52,13 +66,34 @@ export default function RTable() {
             }
         })
     }
+    const addOrEdit = (resetForm) => {
+      
+        resetForm()
+        setRecordForEdit(null)
+        setOpenDialog(false)
+        axios.get('http://localhost:5000/employee')
+            .then(data => {console.log(data.data)
+                setRecords(data.data)
+                window.location.reload()})
+        setNotify({
+            isOpen: true,
+            message: 'Submitted Successfully',
+            type: 'success'
+        })
+    }
+
+    const openInDialog = item => {
+        
+        setRecordForEdit(item)
+        setOpenDialog(true)
+    }
+    
     return (
         <div>
-           
+            
             <Container  className="pagecontainer">
                 <Paper className="pageContent">
-                    {/* <BankerUserForm/>  */}
-                    {/* <RequestForm/>  */}
+                   
                     <Toolbar>
                         <Controls.Input
                             color='primary'
@@ -78,13 +113,19 @@ export default function RTable() {
                             {
                                 recordsAfterPagingAndSorting().map(item =>
                                     (<TableRow key={item._id}>
-                                        <TableCell>{item.clientId}</TableCell>
-                                        <TableCell>{item.loansId}</TableCell>
+                                        
+                                        <TableCell>{item.rib }</TableCell>
+                                        <TableCell>{item._id ? (item._id.$oid).substr(19, 5):''}</TableCell>
+                                        <TableCell>{item.loan_amnt}</TableCell>
+                                        <TableCell>{item.loan_intent}</TableCell>
                                         <TableCell>{item.status}</TableCell>
                                         <TableCell>                                     
-                                            <Link to ="/admin/clientform" element= {<BankerUserForm/>}> 
-                                                <EditOutlinedIcon fontSize="small" />
-                                            </Link>                                                                                         
+                                            <Button color="#0e4064" value="Open" onClick={() =>{ setEdit(true);openInDialog(item) }}
+                                            >
+                
+                                            </Button>
+                                               
+                                                                                                                             
                                         </TableCell>
                                     </TableRow>)
                                 )
@@ -93,6 +134,16 @@ export default function RTable() {
                     </TblContainer>
                     <TblPagination />
                 </Paper>
+                <UseDialog
+                title="Banker Form"
+                OpenDialog={OpenDialog}
+                setOpenDialog={setOpenDialog}
+            >
+                <BankerUserForm
+                     recordForEdit={recordForEdit}
+                     edit={edit}
+               />
+            </UseDialog>
             </Container>
         </div>
     )

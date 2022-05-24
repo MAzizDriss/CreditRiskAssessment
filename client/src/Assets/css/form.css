@@ -1,8 +1,8 @@
 .Form-container{
-    padding: 8% 3% !important;
+    padding: 3% 3% !important;
 }
 @media screen and (max-width:768px) {
     .Form-container{
-        padding:8% 5% !important;
+        padding:5% 5% !important;
     }
 }
