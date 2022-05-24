@@ -42,7 +42,7 @@ function ClientNav() {
   return (
     <nav className="head">
       <div className="head-container">
-        <Link to="/c/home" className="head-logo">
+        <Link to="/ " className="head-logo">
           Online Tunisian Banking
         </Link>
         <div>
@@ -66,7 +66,7 @@ function ClientNav() {
             <List component="nav" aria-label="secondary mailbox folder">
 
 
-              <Link to='/c/account' className='lnk'>
+              <Link to='/client/account' className='lnk'>
                 <ListItem button>
                   <ListItemText primary="My Account" />
                 </ListItem>

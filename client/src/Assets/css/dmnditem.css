@@ -10,7 +10,7 @@
 }
 .rh{
    margin-left: 100px;
-   font-size: 18px ;
+   font-size: 13px ;
    color:white;
    
 }
@@ -21,16 +21,18 @@
 }
 .t1{
     color:white;
-    font-size: 18px ;
+    font-size: 13px ;
 }
 .t2{
-    color:white;
+    color:var(--green);
     font-size: 10px ;
 }
 .conta{
-    
-   margin-left: 20px;
-   margin-top:50px
+  align-items: center;
+  justify-content: center;
+   margin-left: 25%;
+   margin-top:50px;
+   margin-right: 25%;
 
 }
 .c1{
@@ -47,5 +49,5 @@ margin-left: 40%;
     margin-bottom: 60px;
     width: 400px;
     height: 2px;
-    margin-left: -4%;
+    margin-left: -2.3%;
 }

@@ -6,20 +6,33 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import '../../Assets/css/dmnditem.css'
 import { ThemeConsumer } from 'styled-components';
-function getstat(stat){
-    if (stat=='Approved'){
-        return 1
-    }
-    else {
-        return 0
-    }
+import { useState } from 'react';
+import { useEffect } from 'react';
+function getcolor(stat){
+    
 }
 
 export default function DemandItem(props) {
-   
-    console.log(getstat(props.status))
+  const [color,setColor]=useState("")
+  const getColor=(stat)=>{
+    if (stat=='Approved'){
+       setColor("#58f04a")
+  }
+  else{
+    if(stat=='Refused'){
+    setColor("red")
+  }
+      else{setColor("#ffeb36")}
+  }
+  }
+useEffect(()=>{
+  getColor(props.status)
+},[]) 
+console.log(color,props.status)
+
+    
   return (
-    <Card  sx={{ maxWidth: 350,backgroundColor:'var(--light-blue) ', boxShadow: '0px 5px 10px 0px rgba(0, 0, 0, 0.5)' ,borderRadius:'25px'}}>
+    <Card  sx={{ maxWidth: 300,backgroundColor:'var(--light-blue) ', boxShadow: '0px 5px 10px 0px rgba(0, 0, 0, 0.5)' ,borderRadius:'25px'}}>
       <CardActionArea>
         
         <CardContent>
@@ -35,13 +48,13 @@ export default function DemandItem(props) {
           
           <div className='fl'>
           <Typography className='t1' gutterBottom variant="h7" component="div">
-            Date: {props.date}
+            Loan amount: {props.date}
           </Typography>
           <div className='f'>
           <Typography  className='rh' gutterBottom variant="h7" component="div">
             Status :
           </Typography>
-          <Typography style={getstat(props.status) ? {color:'#65fa43'}: {color:'red'}} className='rh' gutterBottom variant="h7" component="div">
+          <Typography style={{color:color}} className='rh' gutterBottom variant="h7" component="div">
            {props.status}
           </Typography>
           </div>
