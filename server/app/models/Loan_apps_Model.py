@@ -18,4 +18,4 @@ class Loan_app(me.Document):
     loan_status=me.IntField()
     mail_status=me.IntField()
     file_status=me.IntField()
-
+    rib=me.StringField(Required=True)

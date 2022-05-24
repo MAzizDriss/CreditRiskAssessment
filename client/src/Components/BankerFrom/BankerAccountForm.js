@@ -9,45 +9,54 @@ import { KeyboardDatePicker, MuiPickersUtilsProvider } from "@material-ui/picker
 import '../../Assets/css/form.css'
 import ButtonWrapper from '../BankerFrom/Button'
 import axios from 'axios';
+import { useEffect } from 'react';
 // import { Container } from './styles';
-const INITIAL_FORM_STATE = {
-    username:'CoolestUser58',
-    rib: '1234567891234567',
-    cin: '11858290',
-    adress :'',
-    firstname: 'John',
-    lastname: 'Doe',
-    email:'John@Doe.mail',
-    phone: "56160606",
-    age:'25'
-}
+
 const FORM_VALIDATION = Yup.object().shape({
-    username:Yup.string(),
     firstname: Yup.string().required('First Name is required').min(2).max(30),
     lastname: Yup.string().required('Last Name is required').min(2).max(30),
     email: Yup.string().required('Email is required').email('Invalid email!'),
     phone: Yup.number().required('Phone is required').integer().typeError('Please enter a valid phone number!')
         .moreThan(9999999, 'Please enter a valid phone number!').lessThan(99999999, 'Please enter a valid phone number!'),
-    rib: Yup.string().required('account number is required').length(16),
+    rib: Yup.string().required('account number is required'),
     cin: Yup.string().required('Id number is required').length(8),
-    adress: Yup.string().required('adress is required')
+    adress: Yup.string().required('adress is required'),
+    age:Yup.number().required('age is required').min(18).max(100)
 
 
 
 })
-function BankerAccountForm({setedit}) {
+function BankerAccountForm({setedit,data}) {
+    
+    
+    
     return <>
         <Container >
             <Formik
                 initialValues={{
-                    ...INITIAL_FORM_STATE
+                    
+   
+                        rib: data.rib,
+                        cin: data.cin,
+                        adress :data.adress,
+                        firstname: data.firstname,
+                        lastname: data.lastname,
+                        email:data.email,
+                        phone: data.phone,
+                        age:data.age
+                    
                 }
                 }
                 validationSchema={FORM_VALIDATION}
                 onSubmit={values => {
-                    console.log(values)
+                    
                     setedit(false)
-                    //the axios is here
+                    axios.put(`http://localhost:5000/user/update/${data._id.$oid}`,{
+                        
+                        "adress":values.adress,
+                        "phone":values.phone,
+                        "age":values.age
+                    })
                 }
                 }
             >
@@ -62,8 +71,8 @@ function BankerAccountForm({setedit}) {
                         <Grid item xs={4}>
                             <TextFieldWrapper
                                 disabled
-                                name="username"
-                                label="Username"
+                                name="cin"
+                                label="ID Number"
                                
                             />
                         </Grid>
@@ -81,6 +90,7 @@ function BankerAccountForm({setedit}) {
                         </Grid>
                         <Grid item xs={6}>
                             <TextFieldWrapper
+                            disabled
                                 name="firstname"
                                 label="First Name"
                             />
@@ -88,20 +98,9 @@ function BankerAccountForm({setedit}) {
 
                         <Grid item xs={6}>
                             <TextFieldWrapper
+                            disabled
                                 name="lastname"
                                 label="Last Name"
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextFieldWrapper
-                                name="cin"
-                                label="ID Number"
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextFieldWrapper
-                                name="email"
-                                label="Email"
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -110,6 +109,14 @@ function BankerAccountForm({setedit}) {
                                 label="Age"
                             />
                         </Grid>
+                        <Grid item xs={6}>
+                            <TextFieldWrapper
+                            disabled
+                                name="email"
+                                label="Email"
+                            />
+                        </Grid>
+                        
                 
                         
                         <Grid item xs={6}>

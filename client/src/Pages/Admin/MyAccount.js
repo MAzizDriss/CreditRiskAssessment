@@ -17,7 +17,7 @@ const [edit,setEdit]= useState(false)
 const [users,setUsers] = useState([])
 const handleClick = (event) => {
   setEdit(!edit);
-  console.log(edit)
+  
 };
 useEffect(()=>{
   axios.get('http://localhost:5000/api/protected', {
@@ -37,8 +37,8 @@ useEffect(()=>{
   <Container maxWidth='false' className='card-container'>
         <div className='bluhd'>
           <h2 className='title'>My informations</h2>
-          <Fab className='bttn' size="medium" color="false" onClick={handleClick} aria-label="add" >
-             <EditIcon/></Fab>
+          {!edit?<Fab className='bttn' size="medium" color="false" onClick={handleClick} aria-label="add" >
+             <EditIcon/></Fab>:<></>}
         </div>
         <div className='info'>
           
@@ -47,7 +47,7 @@ useEffect(()=>{
           </div>
           
           <Grid container className='details'>
-          { edit ? <BankerAccountForm setedit={setEdit} /> :<>
+          { edit ? <BankerAccountForm setedit={setEdit} data={users} /> :<>
             <Grid item xs={12}><h3 className='card-header'> Account details</h3></Grid>
             <Grid  item xs={6}>
             <div className='itm'> 

@@ -1,56 +1,60 @@
-import React, { useState } from 'react';
-import { Formik, Form, useprops } from 'formik'
-import * as Yup from 'yup'
-import {Button}from '@material-ui/core'
-import { Space, FormLabel } from '../BankerFrom/BFormElements'
-import { Container, Grid, TextField } from '@material-ui/core'
+import React from 'react'
+import { Formik, Form } from 'formik'
+import {  FormLabel } from '../BankerFrom/BFormElements'
+import { Container, Grid } from '@material-ui/core'
 import TextFieldWrapper from '../BankerFrom/TextFieldWrapper'
-import { KeyboardDatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import '../../Assets/css/form.css'
 import ButtonWrapper from '../BankerFrom/Button'
 import axios from 'axios';
+import * as Yup from 'yup'
+
 // import { Container } from './styles';
-const INITIAL_FORM_STATE = {
-    
-    rib: '1234567891234567',
-    cin: '11858290',
-    adress: '',
-    firstname: 'John',
-    lastname: 'Doe',
-    email: 'John@Doe.mail',
-    phone: "56160606",
-    date: '',
-    age:'25'
-}
+
 const FORM_VALIDATION = Yup.object().shape({
-    firstname: Yup.string().required('Required !').min(2).max(30),
-    lastname: Yup.string().required('Required!').min(2).max(30),
-    email: Yup.string().email('Invalid email!').required('Required'),
-    phone: Yup.number().integer().typeError('Please enter a valid phone number!').required('Required!')
+    firstname: Yup.string().required('First Name is required').min(2).max(30),
+    lastname: Yup.string().required('Last Name is required').min(2).max(30),
+    email: Yup.string().required('Email is required').email('Invalid email!'),
+    phone: Yup.number().required('Phone is required').integer().typeError('Please enter a valid phone number!')
         .moreThan(9999999, 'Please enter a valid phone number!').lessThan(99999999, 'Please enter a valid phone number!'),
-    date: Yup.date().required('Required'),
-    rib: Yup.string().length(16).required('Required'),
-    cin: Yup.string().length(8),
-    location: Yup.string().required('Required'),
-    adress: Yup.string().required('Required')
+    rib: Yup.string().required('account number is required'),
+    cin: Yup.string().required('Id number is required').length(8),
+    adress: Yup.string().required('adress is required'),
+    age:Yup.number().required('age is required').min(18).max(100)
 
 
 
 })
-function ClientUserForm(handleClick) {
-    const [selectedDate, handleDateChange] = useState()
-
+function ClientUserForm({setedit,data}) {
+    
+    
+    
     return <>
         <Container >
             <Formik
                 initialValues={{
-                    ...INITIAL_FORM_STATE
+                    
+   
+                        rib: data.rib,
+                        cin: data.cin,
+                        adress :data.adress,
+                        firstname: data.firstname,
+                        lastname: data.lastname,
+                        email:data.email,
+                        phone: data.phone,
+                        age:data.age
+                    
                 }
                 }
                 validationSchema={FORM_VALIDATION}
                 onSubmit={values => {
-                    console.log(values)
-                    //the axios is here
+                    
+                    setedit(false)
+                    axios.put(`http://localhost:5000/client/update/${data._id.$oid}`,{
+                        
+                        "adress":values.adress,
+                        "phone":values.phone,
+                        "age":values.age
+                    })
                 }
                 }
             >
@@ -65,8 +69,8 @@ function ClientUserForm(handleClick) {
                         <Grid item xs={4}>
                             <TextFieldWrapper
                                 disabled
-                                name="username"
-                                label="Username"
+                                name="cin"
+                                label="ID Number"
                                
                             />
                         </Grid>
@@ -75,8 +79,6 @@ function ClientUserForm(handleClick) {
                                 disabled
                                 name="rib"
                                 label="Account Number"
-                                value={props.values.rib}
-                                onChange={props.handleChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -86,61 +88,47 @@ function ClientUserForm(handleClick) {
                         </Grid>
                         <Grid item xs={6}>
                             <TextFieldWrapper
-                                value={props.values.firstname}
+                            disabled
                                 name="firstname"
                                 label="First Name"
-                                onChange={props.handleChange}
                             />
                         </Grid>
 
                         <Grid item xs={6}>
                             <TextFieldWrapper
+                            disabled
                                 name="lastname"
                                 label="Last Name"
-                                value={props.values.lastname}
-                                onChange={props.handleChange}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextFieldWrapper
-                                name="cin"
-                                label="ID Number"
-                                value={props.values.cin}
-                                onChange={props.handleChange}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextFieldWrapper
-                                name="email"
-                                label="Email"
-                                value={props.values.email}
-                                onChange={props.handleChange}
                             />
                         </Grid>
                         <Grid item xs={6}>
                             <TextFieldWrapper
                                 name="age"
                                 label="Age"
-                                value={props.values.age}
-                                onChange={props.handleChange}
                             />
                         </Grid>
+                        <Grid item xs={6}>
+                            <TextFieldWrapper
+                            disabled
+                                name="email"
+                                label="Email"
+                            />
+                        </Grid>
+                        
                 
                         
                         <Grid item xs={6}>
                             <TextFieldWrapper
                                 name="adress"
                                 label="Adress"
-                                onChange={props.handleChange}
-                                value={props.adress}
+                                
                             />
                         </Grid>
                         <Grid item xs={6}>
                             <TextFieldWrapper
                                 name="phone"
                                 label="Mobile"
-                                onChange={props.handleChange}
-                                value={props.values.phone}
+                                
                             />
                         </Grid>
                        
@@ -148,9 +136,9 @@ function ClientUserForm(handleClick) {
                             <></>
                         </Grid>
                         <Grid item xs={2}>
-                            <Button type="submit" variant="contained" >
-                                Submit
-                            </Button>
+                            <ButtonWrapper>
+                                        Submit
+                            </ButtonWrapper>
                         </Grid>
                     </Grid>
                 </Form>

@@ -53,7 +53,7 @@ def update_user(user_id):
     if (not user):
         return ("User Not Found", 404)
     else:
-        user.update(email=user_data["email"],
+        user.update(
         adress=user_data["adress"],
         phone=user_data["phone"],
         age=user_data["age"],
