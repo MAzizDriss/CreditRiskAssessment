@@ -81,6 +81,14 @@ export default function RTable() {
         setRecordForEdit(item)
         setOpenDialog(true)
     }
+
+    const get_color = (status)=>{
+        if (status=='Approved') return 'green'
+        if (status=='Refused') return 'red'
+        else return '#E1AD01'
+    }
+
+
     
     return (
         <div>
@@ -106,12 +114,12 @@ export default function RTable() {
                         <TableBody>
                             {
                                 recordsAfterPagingAndSorting().map(item =>
-                                    (<TableRow key={item._id}>  
+                                    (<TableRow key={item._id} >  
                                         <TableCell>{item.rib }</TableCell>
                                         <TableCell>{item._id ? (item._id.$oid).substr(19, 5):''}</TableCell>
                                         <TableCell>{item.loan_intent}</TableCell>
-                                        <TableCell>{item.mail_status}</TableCell>
-                                        <TableCell>{item.status}</TableCell>
+                                        <TableCell >{item.mail_status}</TableCell>
+                                        <TableCell style={{color:get_color(item.status)}}>{item.status}</TableCell>
                                         <TableCell>                                     
                                             <ButtonTab Color='#0e4064' text="Open"  onClick={() =>{
                                                 console.log(item)

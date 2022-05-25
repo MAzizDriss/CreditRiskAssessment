@@ -80,9 +80,13 @@ const BankerUserForm = (props) => {
         resetForm
     } = UseForm(INITIAL_FORM_STATE, true, FORM_VALIDATION);
 
-
+    const [modelres,setModelres]=useState(null)
     const [user,setUser]= useState(null)
+    const [loan_data,setData]=useState(null)
     const [showResults,setShowResults]=useState(false)
+    const [putdata,setPutdata]=useState(null)
+
+
 
     const fetch_client_data = async (id)=>{
         await axios.get(`http://localhost:5000/user/${id}`, {
@@ -94,6 +98,18 @@ const BankerUserForm = (props) => {
                 setUser(res.data)
                 if (user) console.log(user)}
         ).catch((err)=>console.log(err))
+    }
+    const data_to_model = async (data)=>{
+        await axios.post('http://localhost:5000/admin/checkmodel',data, {
+            headers: {
+              "token": localStorage.getItem('token')
+            }}).then(
+                res=>{
+                    setModelres(res.data)
+                    setData(data)
+                    console.log(res.data)
+                }
+            ).catch(err=>console.log(err))
     }
 
   return (
@@ -110,17 +126,14 @@ const BankerUserForm = (props) => {
                 grade:'A',
                 dof:false,
                 mail_status:false,
-                status:"in_progress",
-
             ...recordForEdit}
         }
         validationSchema={FORM_VALIDATION}
         
         onSubmit={(values) => {  
             
-            console.log('action performed')
-                axios.put(`http://localhost:5000/admin/loanapp/update/${values._id.$oid}`,{
-                    'loan_interest_rate':values.loan_interest_rate,
+            let data={
+                'loan_interest_rate':values.loan_interest_rate,
                 //    ' emp_id':emp._id.$oid,
                     'dof':(values.dof).toString(),
                     'status':(values.status).toString(),
@@ -131,7 +144,13 @@ const BankerUserForm = (props) => {
                     'home_ownership':(values.home_ownership).toString(),
                     'loan_intent':(values.loan_intent ).toString (),
                     'loan_term':values.loan_term
-            }).then(response => {
+            }
+            setPutdata(data)
+            console.log('action performed')
+                axios.put(`http://localhost:5000/admin/loanapp/update/${values._id.$oid}`,data)
+                .then(response => {
+                values.dof?values.dof=1:values.dof=0
+                data_to_model(values)
                 setShowResults(true)
               console.log("element modifier et  enregistées dans la base de données ")
           }).catch(error => {})
@@ -146,7 +165,7 @@ const BankerUserForm = (props) => {
                             Client personal details
                         </FormLabel>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} >
                             <TextFieldWrapper 
                             
                             name="firstName"
@@ -278,10 +297,9 @@ const BankerUserForm = (props) => {
                             />
                        </Grid>
                        <Grid item xs={6}>
-                   <SelectWrapper
+                   <TextFieldWrapper
                             name="status"
                             label="Status" 
-                            options={{Approved:'Approved',In_Progress:'In Progress',Refused:'Refused'}}  
                             disabled="true"
                             />
                     </Grid>
@@ -298,7 +316,7 @@ const BankerUserForm = (props) => {
                     </Grid>
                 </Grid>
             </Form>
-        </Formik>:<ResultCard loan_data={values} user={user}/>}</>:<>Loading...</>}
+        </Formik>:<ResultCard putdata={putdata} modelres={modelres} loan_data={loan_data} user={user} setShowResults={setShowResults}/>}</>:<>Loading...</>}
     </Container>
     <Space/>
     </>

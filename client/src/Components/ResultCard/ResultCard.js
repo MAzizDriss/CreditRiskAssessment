@@ -6,13 +6,42 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
+import Reload from '../ReloadComponent/Reload';
+import axios from 'axios';
 
 
-
-export default function ResultCard({ user, loan_data }) {
+export default function ResultCard({ putdata,setShowResults ,modelres,user, loan_data }) {
+    const proba = ()=>{
+        let prob= modelres.proba*50/0.15
+        if (prob>30) return 99.99
+        else return prob
+    }
+    const res_col =()=>{
+        if (proba()<40) return 'green'
+        if ( proba()<60) return 'yellow'
+        else return 'red'   
+    }
+    const handleRefuse = async()=>{
+        putdata.status='Refused'
+        console.log(putdata)
+        await axios.put(`http://localhost:5000/admin/loanapp/update/${loan_data._id.$oid}`,putdata)
+        .then(response => {
+            window.location.reload();
+      console.log("element modifier et  enregistées dans la base de données ")
+  }).catch(error => {})
+    }
+    const handleAccept = async()=>{
+        putdata.status='Approved'
+        console.log(loan_data)
+        await axios.put(`http://localhost:5000/admin/loanapp/update/${loan_data._id.$oid}`,putdata)
+        .then(response => {
+            window.location.reload();
+      console.log("element modifier et  enregistées dans la base de données ")
+  }).catch(error => {})
+    }
     return (
-        
-        <Box sx={{ minWidth: 800, marginRight: '50%' }}>
+        <>
+    {  (loan_data && modelres)?  <Box sx={{ minWidth: 800, marginRight: '50%' }}>
             {console.log(loan_data)}
             <Card variant="outlined">
                 <React.Fragment >
@@ -157,14 +186,15 @@ export default function ResultCard({ user, loan_data }) {
                                 Default probability:
                             </Typography>
                             </Grid>
-                        <Grid item xs={6} style={{marginLeft:'68%',fontSize:'64px', color:'red'}}>56%</Grid>
+                        <Grid item xs={6} style={{marginLeft:'63%',fontSize:'64px', color:res_col()}}>{(proba()).toString().substring(0,5)}%</Grid>
                     </CardContent>
                     <CardActions style={{marginLeft:'70%'}}>
-                        <Button >REFUSE</Button>
-                        <Button> APPROVE</Button>
+                        <Button onClick={()=>{handleRefuse()}}>REFUSE</Button>
+                        <Button onClick={()=>{handleAccept()}}> APPROVE</Button>
                     </CardActions>
 
                 </React.Fragment></Card>
-        </Box>
+        </Box>:<div style={{marginLeft:'40%',marginTop:'20%',width:'100%'}}><Reload /></div>}
+        </>
     );
 }

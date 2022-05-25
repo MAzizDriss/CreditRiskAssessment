@@ -13,7 +13,7 @@ filename='xgbmodal.pkl'
 mod=pickle.load(open(filename,'rb'))
 
 
-@app.route('/admin/checkmodal',methods=['POST'])
+@app.route('/admin/checkmodel',methods=['POST'])
 def checkmodal():
     loandata=json.loads(request.data)
     
@@ -39,8 +39,8 @@ def checkmodal():
     int(getGradeF(loandata['grade'])),
     int(getGradeG(loandata['grade'])),
     int(loandata['dof']),
-    float(np.log(loandata['annual_income'])),
-    float(np.log(loandata['loan_amnt'])),
+    float(np.log(float(loandata['annual_income']))),
+    float(np.log(float(loandata['loan_amnt']))),
     ]
     df2 = pd.DataFrame(data={'Unnamed: 0':X_test[0], 'person_age':X_test[1], 'person_emp_length':X_test[2], 'loan_int_rate':X_test[3],
        'person_home_ownership_MORTGAGE':X_test[4], 'person_home_ownership_OTHER':X_test[5],

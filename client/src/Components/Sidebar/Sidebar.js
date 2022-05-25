@@ -80,13 +80,18 @@ function Sidebar() {
               >
                 <div >
                   <List component="nav" aria-label="secondary mailbox folder">
-                    <Link to='/a/account' className='lnk'>
+                    <Link to='/admin/account' className='lnk'>
                       <ListItem button>
                       <ListItemText primary="My Account" />
                       </ListItem>
                     </Link>
                     <Link to='/' className='lnk'>
-                      <ListItem button >
+                      <ListItem button onClick={(evt)=>{
+      console.log('logout')
+      localStorage.setItem('token', "");
+      localStorage.setItem('connected', false);
+      window.location.replace("http://localhost:3000/")
+    }}>
                         <ListItemText primary="Log out"  />
                       </ListItem>
                     </Link>
